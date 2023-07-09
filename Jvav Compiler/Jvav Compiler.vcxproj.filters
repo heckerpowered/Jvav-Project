@@ -10,12 +10,27 @@
     <Filter Include="code analysis\syntax">
       <UniqueIdentifier>{0ad88614-44b3-4473-8dc0-f14b91be408f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="command">
+      <UniqueIdentifier>{b28fd7de-c8af-45d3-a0b6-df7f9c932ef7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="code analysis\evaluation">
+      <UniqueIdentifier>{b604f1aa-6469-4522-80e8-ef542543c723}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="code analysis\syntax\expression">
+      <UniqueIdentifier>{01ec989b-62ec-4863-a928-4e62b240aa25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="code analysis\syntax\experimental">
+      <UniqueIdentifier>{79691737-8882-4a5a-86c5-e30d007c8af8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="code analysis\syntax\statement">
+      <UniqueIdentifier>{14543348-a4b1-46f4-ab52-f3a524e12a0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utility">
+      <UniqueIdentifier>{1df0cc4b-a423-4cf0-b621-e51d603c48ab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.ixx" />
-    <ClCompile Include="argument_solver.ixx">
-      <Filter>code analysis</Filter>
-    </ClCompile>
     <ClCompile Include="source_text.ixx">
       <Filter>code analysis\text</Filter>
     </ClCompile>
@@ -25,7 +40,7 @@
     <ClCompile Include="syntax_token.ixx">
       <Filter>code analysis\syntax</Filter>
     </ClCompile>
-    <ClCompile Include="lexer.ixx">
+    <ClCompile Include="lexical_analyzer.ixx">
       <Filter>code analysis\syntax</Filter>
     </ClCompile>
     <ClCompile Include="text_line.ixx">
@@ -33,6 +48,75 @@
     </ClCompile>
     <ClCompile Include="text_span.ixx">
       <Filter>code analysis\text</Filter>
+    </ClCompile>
+    <ClCompile Include="diagnostics.ixx">
+      <Filter>code analysis\text</Filter>
+    </ClCompile>
+    <ClCompile Include="diagnostic.ixx">
+      <Filter>code analysis\text</Filter>
+    </ClCompile>
+    <ClCompile Include="argument_solver.ixx">
+      <Filter>command</Filter>
+    </ClCompile>
+    <ClCompile Include="command_user_interface.ixx">
+      <Filter>command</Filter>
+    </ClCompile>
+    <ClCompile Include="syntax_facts.ixx">
+      <Filter>code analysis\syntax</Filter>
+    </ClCompile>
+    <ClCompile Include="parser.ixx">
+      <Filter>code analysis\syntax</Filter>
+    </ClCompile>
+    <ClCompile Include="syntax_node.ixx">
+      <Filter>code analysis\syntax</Filter>
+    </ClCompile>
+    <ClCompile Include="expression_syntax.ixx">
+      <Filter>code analysis\syntax\expression</Filter>
+    </ClCompile>
+    <ClCompile Include="compilation_unit_syntax.ixx">
+      <Filter>code analysis\syntax</Filter>
+    </ClCompile>
+    <ClCompile Include="name_expression_syntax.ixx">
+      <Filter>code analysis\syntax\expression</Filter>
+    </ClCompile>
+    <ClCompile Include="unary_expression_syntax.ixx">
+      <Filter>code analysis\syntax\expression</Filter>
+    </ClCompile>
+    <ClCompile Include="number_literal_expression_syntax.ixx">
+      <Filter>code analysis\syntax\expression</Filter>
+    </ClCompile>
+    <ClCompile Include="assignment_expression_syntax.ixx">
+      <Filter>code analysis\syntax\expression</Filter>
+    </ClCompile>
+    <ClCompile Include="intelli_parser.ixx">
+      <Filter>code analysis\syntax\experimental</Filter>
+    </ClCompile>
+    <ClCompile Include="binary_expression_syntax.ixx">
+      <Filter>code analysis\syntax\expression</Filter>
+    </ClCompile>
+    <ClCompile Include="boolean_literal_expression_syntax.ixx">
+      <Filter>code analysis\syntax\expression</Filter>
+    </ClCompile>
+    <ClCompile Include="parenthesized_expression_syntax.ixx">
+      <Filter>code analysis\syntax\expression</Filter>
+    </ClCompile>
+    <ClCompile Include="statemen_syntax.ixx">
+      <Filter>code analysis\syntax\statement</Filter>
+    </ClCompile>
+    <ClCompile Include="block_statement_syntax.ixx">
+      <Filter>code analysis\syntax\statement</Filter>
+    </ClCompile>
+    <ClCompile Include="variable_declaration_syntax.ixx">
+      <Filter>code analysis\syntax\statement</Filter>
+    </ClCompile>
+    <ClCompile Include="if_statement_syntax.ixx">
+      <Filter>code analysis\syntax\statement</Filter>
+    </ClCompile>
+    <ClCompile Include="else_clause_syntax.ixx">
+      <Filter>code analysis\syntax\statement</Filter>
+    </ClCompile>
+    <ClCompile Include="zero_copy.ixx">
+      <Filter>utility</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

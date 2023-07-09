@@ -168,13 +168,35 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="argument_solver.ixx" />
-    <ClCompile Include="lexer.ixx" />
+    <ClCompile Include="assignment_expression_syntax.ixx" />
+    <ClCompile Include="binary_expression_syntax.ixx" />
+    <ClCompile Include="block_statement_syntax.ixx" />
+    <ClCompile Include="boolean_literal_expression_syntax.ixx" />
+    <ClCompile Include="else_clause_syntax.ixx" />
+    <ClCompile Include="if_statement_syntax.ixx" />
+    <ClCompile Include="intelli_parser.ixx" />
+    <ClCompile Include="parenthesized_expression_syntax.ixx" />
+    <ClCompile Include="variable_declaration_syntax.ixx" />
+    <ClCompile Include="compilation_unit_syntax.ixx" />
+    <ClCompile Include="diagnostic.ixx" />
+    <ClCompile Include="diagnostics.ixx" />
+    <ClCompile Include="command_user_interface.ixx" />
+    <ClCompile Include="expression_syntax.ixx" />
+    <ClCompile Include="lexical_analyzer.ixx" />
+    <ClCompile Include="number_literal_expression_syntax.ixx" />
     <ClCompile Include="main.ixx" />
+    <ClCompile Include="name_expression_syntax.ixx" />
+    <ClCompile Include="parser.ixx" />
     <ClCompile Include="source_text.ixx" />
+    <ClCompile Include="statemen_syntax.ixx" />
+    <ClCompile Include="syntax_facts.ixx" />
     <ClCompile Include="syntax_kind.ixx" />
+    <ClCompile Include="syntax_node.ixx" />
     <ClCompile Include="syntax_token.ixx" />
     <ClCompile Include="text_line.ixx" />
     <ClCompile Include="text_span.ixx" />
+    <ClCompile Include="unary_expression_syntax.ixx" />
+    <ClCompile Include="zero_copy.ixx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

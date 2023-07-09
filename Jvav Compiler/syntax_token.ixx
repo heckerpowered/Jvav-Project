@@ -2,17 +2,33 @@ export module compiler.syntax_token;
 
 import std;
 import compiler.syntax_kind;
+import compiler.text_span;
+import compiler.syntax_node;
 
 namespace compiler {
-    export class syntax_token {
+    export class syntax_token : public syntax_node {
     public:
-        syntax_kind const kind;
+        syntax_kind const syntax_kind;
         std::size_t const position;
-        std::string const text;
-        std::optional<std::any> const value;
+        std::string_view const text; 
 
-        [[nodiscard]] syntax_token(syntax_kind const kind, std::size_t const position, std::string text, 
-            std::optional<std::any> value = std::nullopt)
-            noexcept : kind(kind), position(position), text(std::move(text)), value(value) {}
+        [[nodiscard]] syntax_token(compiler::syntax_kind const kind, std::size_t const position, std::string_view const& text)
+            noexcept : syntax_kind(kind), position(position), text(text) {}
+
+        syntax_token(syntax_token const&) = default;
+
+        virtual text_span span() const noexcept override {
+            return { position, text.length() };
+        }
+
+        virtual compiler::syntax_kind kind() const noexcept override
+        {
+            return syntax_kind;
+        }
+
+        virtual std::vector<std::shared_ptr<syntax_node>> const children() const noexcept override
+        {
+            return {};
+        }
     };
 }

@@ -4,9 +4,7 @@ import std;
 
 namespace compiler {
 
-    class source_text;
-
-    export class text_line final {
+    export template<typename source_text> class text_line final {
     public:
         source_text const& text;
         std::size_t const start;

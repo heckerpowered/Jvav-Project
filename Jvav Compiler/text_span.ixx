@@ -14,5 +14,10 @@ namespace compiler {
         constexpr std::size_t end() const noexcept {
             return start + length;
         }
+
+        static text_span from_bounds(std::size_t const start, std::size_t const end) noexcept {
+            auto const length = end - start;
+            return text_span(start, length);
+        }
     };
 }

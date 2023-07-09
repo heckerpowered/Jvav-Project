@@ -6,13 +6,15 @@ import compiler.text_line;
 namespace compiler {
     export class source_text final {
     public:
+        using text_line = compiler::text_line<source_text>;
+
         std::string_view const text;
         std::vector<text_line> const lines;
 
-        [[nodiscard]] constexpr source_text(std::string_view const& text) 
+        [[nodiscard]] source_text(std::string_view const& text) 
             noexcept : text(text), lines(parse_lines(*this, text)) {}
 
-        [[nodiscard]] constexpr char const& operator[](std::size_t const index) const noexcept {
+        [[nodiscard]] char const& operator[](std::size_t const index) const noexcept {
             return text.at(index);
         }
 
@@ -47,8 +49,8 @@ namespace compiler {
         static std::vector<text_line> parse_lines(source_text& source_text, std::string_view const& text) noexcept {
             auto result = std::vector<text_line>();
 
-            auto position = 0;
-            auto line_start = 0;
+            auto position = std::size_t();
+            auto line_start = std::size_t();
 
             while (position < text.length()) {
                 auto const line_break_width = get_line_break_width(text, position);
@@ -71,7 +73,7 @@ namespace compiler {
         static void add_line(std::vector<text_line>& result, source_text& source_text, std::size_t const position,
             std::size_t const line_start, std::size_t const line_break_width) noexcept {
             auto const line_length = position - line_start;
-            auto const line = text_line(source_text, line_start, line_length, line_break_width);
+            auto line = text_line(source_text, line_start, line_length, line_break_width);
             result.emplace_back(line);
         }
 
