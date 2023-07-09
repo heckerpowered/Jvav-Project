@@ -133,7 +133,7 @@ namespace compiler {
             }
         }
 
-        [[nodiscard]] 
+        [[nodiscard]]
         std::shared_ptr<expression_syntax> parse_binary_expression(std::uint_fast8_t const parent_precedence = 0) noexcept {
             auto left = std::shared_ptr<expression_syntax>();
 
@@ -195,25 +195,6 @@ namespace compiler {
             return parse_binary_expression();
         }
 
-        [[nodiscard]] std::shared_ptr<statement_syntax> parse_statement() noexcept {
-            if (peek(0)->kind() == syntax_kind::identifier_token &&
-                peek(1)->kind() == syntax_kind::identifier_token) {
-                return parse_variable_declaration();
-            }
-
-            switch (current()->kind())
-            {
-            case syntax_kind::open_brace_token:
-                return parse_block_statement();
-            case syntax_kind::if_keyword:
-                return parse_if_statement();
-            case syntax_kind::while_keyword:
-                return parse_while_statement();
-            default:
-                return nullptr;
-            }
-        }
-
         [[nodiscard]] std::shared_ptr<else_clause_syntax> parse_else_clause() noexcept {
             if (current()->kind() != syntax_kind::else_clause) {
                 return nullptr;
@@ -268,6 +249,26 @@ namespace compiler {
 
             auto const close_brace_token = match_token(syntax_kind::close_brace_token);
             return std::make_shared<block_statement_syntax>(open_brace_token, std::move(statements), close_brace_token);
+        }
+
+    public:
+        [[nodiscard]] std::shared_ptr<statement_syntax> parse_statement() noexcept {
+            if (peek(0)->kind() == syntax_kind::identifier_token &&
+                peek(1)->kind() == syntax_kind::identifier_token) {
+                return parse_variable_declaration();
+            }
+
+            switch (current()->kind())
+            {
+            case syntax_kind::open_brace_token:
+                return parse_block_statement();
+            case syntax_kind::if_keyword:
+                return parse_if_statement();
+            case syntax_kind::while_keyword:
+                return parse_while_statement();
+            default:
+                return parse_expression_statement();
+            }
         }
     };
 }

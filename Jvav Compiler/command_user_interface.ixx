@@ -4,7 +4,7 @@ import std;
 import compiler.lexical_analyzer;
 import compiler.pretty_print;
 
-namespace compiler {
+namespace compiler::command_user_interface {
     constexpr bool is_empty_or_whitespace(std::string_view const& text) noexcept {
         if (text.empty()) {
             return true;
@@ -19,7 +19,7 @@ namespace compiler {
         return true;
     }
 
-    void launch() noexcept {
+    export void launch() noexcept {
         std::cin.sync_with_stdio(false);
         std::cout.sync_with_stdio(false);
 
@@ -51,14 +51,4 @@ namespace compiler {
             }
         }
     }
-
-    export class command_user_interface final {
-    private:
-        command_user_interface() = delete;
-
-    public:
-        static void launch() noexcept {
-            compiler::launch();
-        }
-    };
 }
