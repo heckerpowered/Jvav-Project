@@ -9,6 +9,7 @@ import compiler.syntax_token;
 namespace compiler {
     export class variable_declaration_syntax final : public statement_syntax {
     public:
+        using super = statement_syntax;
 
         std::shared_ptr<syntax_token> const type_identifier_token;
         std::shared_ptr<syntax_token> const identifier_token;

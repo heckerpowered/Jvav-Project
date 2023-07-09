@@ -32,7 +32,12 @@ namespace compiler {
 
         virtual std::vector<std::shared_ptr<syntax_node>> const children() const noexcept override
         {
-            return { open_brace_token, close_brace_token };
+            auto children = std::vector<std::shared_ptr<syntax_node>>(statements.size() + 2);
+            children.emplace_back(open_brace_token);
+            children.insert(children.end(), statements.begin(), statements.end());
+            children.emplace_back(close_brace_token);
+
+            return children;
         }
     };
 }

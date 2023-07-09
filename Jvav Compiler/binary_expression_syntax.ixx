@@ -8,7 +8,6 @@ import compiler.syntax_token;
 namespace compiler {
     export class binary_expression_syntax final : public expression_syntax {
     public:
-
         using super = expression_syntax;
 
         std::shared_ptr<expression_syntax> const left;

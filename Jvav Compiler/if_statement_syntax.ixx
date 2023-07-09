@@ -10,7 +10,6 @@ import compiler.syntax_token;
 namespace compiler {
     export class if_statement_syntax final : public statement_syntax {
     public:
-
         using super = statement_syntax;
 
         std::shared_ptr<syntax_token> const if_keyword;

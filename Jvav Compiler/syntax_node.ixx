@@ -1,6 +1,7 @@
 export module compiler.syntax_node;
 
 import std;
+
 import compiler.syntax_kind;
 import compiler.text_span;
 

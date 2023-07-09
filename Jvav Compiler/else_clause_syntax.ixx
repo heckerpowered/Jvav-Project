@@ -9,7 +9,6 @@ import compiler.syntax_node;
 namespace compiler {
     export class else_clause_syntax final : public syntax_node {
     public:
-
         using super = syntax_node;
 
         std::shared_ptr<syntax_token> const else_keyword;

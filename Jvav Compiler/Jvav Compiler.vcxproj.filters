@@ -118,5 +118,14 @@
     <ClCompile Include="zero_copy.ixx">
       <Filter>utility</Filter>
     </ClCompile>
+    <ClCompile Include="expression_statement_syntax.ixx">
+      <Filter>code analysis\syntax\statement</Filter>
+    </ClCompile>
+    <ClCompile Include="pretty_print.ixx">
+      <Filter>code analysis\syntax</Filter>
+    </ClCompile>
+    <ClCompile Include="while_statement_syntax.ixx">
+      <Filter>code analysis\syntax\statement</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

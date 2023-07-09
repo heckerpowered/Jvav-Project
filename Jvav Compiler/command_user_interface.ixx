@@ -2,6 +2,7 @@ export module compiler.command_user_interface;
 
 import std;
 import compiler.lexical_analyzer;
+import compiler.pretty_print;
 
 namespace compiler {
     constexpr bool is_empty_or_whitespace(std::string_view const& text) noexcept {
@@ -25,22 +26,28 @@ namespace compiler {
         while (true) {
             std::cout << "> ";
 
-            std::string input;
-            std::cin >> input;
+            auto input = std::string();
+            std::getline(std::cin, input, '\n');
 
             if (is_empty_or_whitespace(input) || input == "exit") {
                 break;
             }
 
             auto analyzer = lexical_analyzer(input);
-
             while (true) {
                 auto token = analyzer.analyze();
-                if (token->kind() == syntax_kind::end_token || token->kind() == syntax_kind::bad_token) {
+                if (token->kind() == syntax_kind::end_token || 
+                    token->kind() == syntax_kind::bad_token) {
                     break;
                 }
 
-                std::cout << compiler::to_string(token->kind()) << " : " << token->text << '\n';
+                if (token->kind() == syntax_kind::whitespace_token || 
+                    token->kind() == syntax_kind::bad_token ||
+                    token->kind() == syntax_kind::end_token) {
+                    continue;
+                }
+
+                std::cout << compiler::to_string(token) << std::endl;
             }
         }
     }

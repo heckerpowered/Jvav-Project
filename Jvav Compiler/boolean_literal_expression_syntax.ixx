@@ -8,7 +8,6 @@ import compiler.syntax_token;
 namespace compiler {
     export class boolean_literal_expression_syntax final : public expression_syntax {
     public:
-
         using super = expression_syntax;
 
         std::shared_ptr<syntax_token> const literal_token;

@@ -29,5 +29,5 @@ int main(int argument_count, char* arguments[]) noexcept {
     if (source_files_iterator == solved_arguments.end()) {
         std::cout << "Error: No source files" << std::endl;
         return 0;
-    }   
+    }
 }

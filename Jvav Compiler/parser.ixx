@@ -6,11 +6,13 @@ import compiler.boolean_literal_expression_syntax;
 import compiler.number_literal_expression_syntax;
 import compiler.parenthesized_expression_syntax;
 import compiler.assignment_expression_syntax;
+import compiler.expression_statement_syntax;
 import compiler.variable_declaration_syntax;
 import compiler.binary_expression_syntax;
 import compiler.unary_expression_syntax;
 import compiler.name_expression_syntax;
 import compiler.block_statement_syntax;
+import compiler.while_statement_syntax;
 import compiler.if_statement_syntax;
 import compiler.else_clause_syntax;
 import compiler.expression_syntax;
@@ -80,7 +82,7 @@ namespace compiler {
         }
 
         [[nodiscard]] std::shared_ptr<expression_syntax> parse_expression() noexcept {
-            
+            return parse_assignment_expression();
         }
 
         [[nodiscard]] std::shared_ptr<variable_declaration_syntax> parse_variable_declaration() noexcept {
@@ -205,7 +207,8 @@ namespace compiler {
                 return parse_block_statement();
             case syntax_kind::if_keyword:
                 return parse_if_statement();
-
+            case syntax_kind::while_keyword:
+                return parse_while_statement();
             default:
                 return nullptr;
             }
@@ -221,12 +224,24 @@ namespace compiler {
             return std::make_shared<else_clause_syntax>(keyword, statement);
         }
 
+        [[nodiscard]] std::shared_ptr<expression_statement_syntax> parse_expression_statement() noexcept {
+            auto const expression = parse_expression();
+            return std::make_shared<expression_statement_syntax>(expression);
+        }
+
         [[nodiscard]] std::shared_ptr<if_statement_syntax> parse_if_statement() noexcept {
             auto const keyword = match_token(syntax_kind::if_keyword);
             auto const condition = parse_expression();
             auto const statement = parse_statement();
             auto const else_clause = parse_else_clause();
             return std::make_shared<if_statement_syntax>(keyword, condition, statement, else_clause);
+        }
+
+        [[nodiscard]] std::shared_ptr<while_statement_syntax> parse_while_statement() noexcept {
+            auto const keyword = match_token(syntax_kind::while_keyword);
+            auto const condition = parse_expression();
+            auto const body = parse_statement();
+            return std::make_shared<while_statement_syntax>(keyword, condition, body);
         }
 
         [[nodiscard]] std::shared_ptr<statement_syntax> parse_block_statement() noexcept {

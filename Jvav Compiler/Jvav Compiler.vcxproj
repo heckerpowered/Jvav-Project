@@ -173,9 +173,11 @@
     <ClCompile Include="block_statement_syntax.ixx" />
     <ClCompile Include="boolean_literal_expression_syntax.ixx" />
     <ClCompile Include="else_clause_syntax.ixx" />
+    <ClCompile Include="expression_statement_syntax.ixx" />
     <ClCompile Include="if_statement_syntax.ixx" />
     <ClCompile Include="intelli_parser.ixx" />
     <ClCompile Include="parenthesized_expression_syntax.ixx" />
+    <ClCompile Include="pretty_print.ixx" />
     <ClCompile Include="variable_declaration_syntax.ixx" />
     <ClCompile Include="compilation_unit_syntax.ixx" />
     <ClCompile Include="diagnostic.ixx" />
@@ -196,6 +198,7 @@
     <ClCompile Include="text_line.ixx" />
     <ClCompile Include="text_span.ixx" />
     <ClCompile Include="unary_expression_syntax.ixx" />
+    <ClCompile Include="while_statement_syntax.ixx" />
     <ClCompile Include="zero_copy.ixx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
