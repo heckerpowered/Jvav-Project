@@ -4,7 +4,7 @@ import std;
 import compiler.text_line;
 
 namespace compiler {
-    export class source_text final {
+    export class source_text final  {
     public:
         using text_line = compiler::text_line<source_text>;
 
@@ -46,7 +46,8 @@ namespace compiler {
         }
 
     private:
-        static std::vector<text_line> parse_lines(source_text& source_text, std::string_view const& text) noexcept {
+        static std::vector<text_line> parse_lines(source_text const& source_text,
+            std::string_view const& text) noexcept {
             auto result = std::vector<text_line>();
 
             auto position = std::size_t();
@@ -68,9 +69,11 @@ namespace compiler {
             if (position >= line_start) {
                 add_line(result, source_text, position, line_start, 0);
             }
+
+            return result;
         }
 
-        static void add_line(std::vector<text_line>& result, source_text& source_text, std::size_t const position,
+        static void add_line(std::vector<text_line>& result, source_text const& source_text, std::size_t const position,
             std::size_t const line_start, std::size_t const line_break_width) noexcept {
             auto const line_length = position - line_start;
             auto line = text_line(source_text, line_start, line_length, line_break_width);

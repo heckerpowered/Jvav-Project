@@ -169,15 +169,17 @@
   <ItemGroup>
     <ClCompile Include="argument_solver.ixx" />
     <ClCompile Include="assignment_expression_syntax.ixx" />
+    <ClCompile Include="benchmark.ixx" />
     <ClCompile Include="binary_expression_syntax.ixx" />
     <ClCompile Include="block_statement_syntax.ixx" />
     <ClCompile Include="boolean_literal_expression_syntax.ixx" />
     <ClCompile Include="else_clause_syntax.ixx" />
     <ClCompile Include="expression_statement_syntax.ixx" />
+    <ClCompile Include="for_statement_syntax.ixx" />
     <ClCompile Include="if_statement_syntax.ixx" />
-    <ClCompile Include="intelli_parser.ixx" />
     <ClCompile Include="parenthesized_expression_syntax.ixx" />
     <ClCompile Include="pretty_print.ixx" />
+    <ClCompile Include="syntax_tree.ixx" />
     <ClCompile Include="variable_declaration_syntax.ixx" />
     <ClCompile Include="compilation_unit_syntax.ixx" />
     <ClCompile Include="diagnostic.ixx" />

@@ -10,6 +10,7 @@ import compiler.expression_statement_syntax;
 import compiler.variable_declaration_syntax;
 import compiler.binary_expression_syntax;
 import compiler.unary_expression_syntax;
+import compiler.compilation_unit_syntax;
 import compiler.name_expression_syntax;
 import compiler.block_statement_syntax;
 import compiler.while_statement_syntax;
@@ -22,6 +23,7 @@ import compiler.syntax_token;
 import compiler.syntax_facts;
 import compiler.source_text;
 import compiler.diagnostics;
+import compiler.syntax_kind;
 import compiler.diagnostic;
 import compiler.zero_copy;
 
@@ -29,14 +31,14 @@ namespace compiler {
     export class parser {
     private:
         std::vector<std::shared_ptr<syntax_token>> tokens;
-        std::string_view const text;
         std::size_t position;
-        diagnostics diagnostics;
+        diagnostics& diagnostics;
 
     public:
-        [[nodiscard]] parser(source_text& text) noexcept : position() {
+        [[nodiscard]] parser(std::shared_ptr<source_text> const& text, compiler::diagnostics& diagnostics) 
+            noexcept : position(), diagnostics(diagnostics) {
             auto tokens = std::vector<std::shared_ptr<syntax_token>>();
-            auto analyzer = lexical_analyzer(text.text);
+            auto analyzer = lexical_analyzer(text->text, diagnostics);
             while (true) {
                 auto token = analyzer.analyze();
                 if (token->kind() != syntax_kind::whitespace_token &&
@@ -251,7 +253,6 @@ namespace compiler {
             return std::make_shared<block_statement_syntax>(open_brace_token, std::move(statements), close_brace_token);
         }
 
-    public:
         [[nodiscard]] std::shared_ptr<statement_syntax> parse_statement() noexcept {
             if (peek(0)->kind() == syntax_kind::identifier_token &&
                 peek(1)->kind() == syntax_kind::identifier_token) {
@@ -269,6 +270,13 @@ namespace compiler {
             default:
                 return parse_expression_statement();
             }
+        }
+
+    public:
+        [[nodiscard]] std::shared_ptr<compilation_unit_syntax> parse_compilation_unit() noexcept {
+            auto const statement = parse_statement();
+            auto const end_token = match_token(syntax_kind::end_token);
+            return std::make_shared<compilation_unit_syntax>(statement, end_token);
         }
     };
 }

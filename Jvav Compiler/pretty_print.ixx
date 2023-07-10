@@ -7,35 +7,25 @@ import compiler.syntax_node;
 import compiler.syntax_kind;
 
 namespace compiler {
-    void pretty_print(std::ostream& stream, std::shared_ptr<syntax_node> const& node, std::string&& indent = std::string(),
-        bool const is_last = false) noexcept {
-        auto const marker = is_last ? "©¸©¤©¤©¤" : "©À©¤©¤©¤";
+    void pretty_print(std::ostream& stream, std::shared_ptr<syntax_node> const& node, std::string indent = std::string(),
+        bool const is_last = true) noexcept {
+        auto const token_marker = is_last ? "©¸©¤©¤" : "©À©¤©¤";
 
-        stream << indent;
-        stream << marker;
-
-        stream << ' ';
-        stream << compiler::to_string(node->kind());
-
-        auto const token = std::dynamic_pointer_cast<syntax_token>(node);
-        if (token) {
-            stream << ' ';
-            stream << token->text;
+        stream << indent << token_marker << to_string(node->kind());
+        if (auto const token = std::dynamic_pointer_cast<syntax_token>(node); token) {
+            stream << ' ' << token->text;
         }
 
         stream << std::endl;
 
-        indent += is_last ? "     " : "|   ";
+        indent += is_last ? "   " : "©¦  ";
 
-        auto const children = node->children();
-        if (children.empty()) {
+        if (node->children().empty()) {
             return;
         }
-
-        auto const& back = children.back();
-
-        for (auto&& child : children) {
-            pretty_print(stream, child, std::move(indent), child == back);
+        auto const last_child = node->children().back();
+        for (auto&& child : node->children()) {
+            pretty_print(stream, child, indent, child == last_child);
         }
     }
 

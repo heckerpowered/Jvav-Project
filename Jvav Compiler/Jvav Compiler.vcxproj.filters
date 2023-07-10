@@ -10,9 +10,6 @@
     <Filter Include="code analysis\syntax">
       <UniqueIdentifier>{0ad88614-44b3-4473-8dc0-f14b91be408f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="command">
-      <UniqueIdentifier>{b28fd7de-c8af-45d3-a0b6-df7f9c932ef7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="code analysis\evaluation">
       <UniqueIdentifier>{b604f1aa-6469-4522-80e8-ef542543c723}</UniqueIdentifier>
     </Filter>
@@ -27,6 +24,12 @@
     </Filter>
     <Filter Include="utility">
       <UniqueIdentifier>{1df0cc4b-a423-4cf0-b621-e51d603c48ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="command">
+      <UniqueIdentifier>{b28fd7de-c8af-45d3-a0b6-df7f9c932ef7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="benchmark">
+      <UniqueIdentifier>{c01f67b1-0bae-4bda-a5c1-0e6554267c28}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -88,9 +91,6 @@
     <ClCompile Include="assignment_expression_syntax.ixx">
       <Filter>code analysis\syntax\expression</Filter>
     </ClCompile>
-    <ClCompile Include="intelli_parser.ixx">
-      <Filter>code analysis\syntax\experimental</Filter>
-    </ClCompile>
     <ClCompile Include="binary_expression_syntax.ixx">
       <Filter>code analysis\syntax\expression</Filter>
     </ClCompile>
@@ -121,11 +121,20 @@
     <ClCompile Include="expression_statement_syntax.ixx">
       <Filter>code analysis\syntax\statement</Filter>
     </ClCompile>
-    <ClCompile Include="pretty_print.ixx">
-      <Filter>code analysis\syntax</Filter>
-    </ClCompile>
     <ClCompile Include="while_statement_syntax.ixx">
       <Filter>code analysis\syntax\statement</Filter>
+    </ClCompile>
+    <ClCompile Include="for_statement_syntax.ixx">
+      <Filter>code analysis\syntax\statement</Filter>
+    </ClCompile>
+    <ClCompile Include="benchmark.ixx">
+      <Filter>benchmark</Filter>
+    </ClCompile>
+    <ClCompile Include="pretty_print.ixx">
+      <Filter>utility</Filter>
+    </ClCompile>
+    <ClCompile Include="syntax_tree.ixx">
+      <Filter>code analysis\syntax</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -24,7 +24,7 @@ namespace compiler {
 
         virtual std::vector<std::shared_ptr<syntax_node>> const children() const noexcept override
         {
-            return { statement };
+            return { statement, end_of_file_token };
         }
     };
 }

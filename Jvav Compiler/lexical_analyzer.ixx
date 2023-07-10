@@ -1,18 +1,22 @@
 export module compiler.lexical_analyzer;
 
 import std;
+
+import compiler.syntax_facts;
 import compiler.syntax_token;
 import compiler.syntax_kind;
-import compiler.syntax_facts;
+import compiler.diagnostics;
 
 namespace compiler {
     export class lexical_analyzer {
     private:
         std::string_view const text;
         std::size_t position;
+        diagnostics& diagnostics;
 
     public:
-        lexical_analyzer(std::string_view const& text) noexcept : text(text), position() {}
+        [[nodiscard]] lexical_analyzer(std::string_view const& text, compiler::diagnostics& diagnostics) 
+            noexcept : text(text), position(), diagnostics(diagnostics) {}
 
     private:
         [[nodiscard]] char current() noexcept {
@@ -179,15 +183,20 @@ namespace compiler {
 
             auto const length = position - start;
             auto const text = this->text.substr(start, length);
+            if (kind == syntax_kind::bad_token) {
+                diagnostics.report_bad_character(text_span(start, length), current());
+                next();
+            }
             return std::make_shared<syntax_token>(kind, start, text);
         }
 
+    private:
         [[nodiscard]] std::shared_ptr<syntax_token> analyze_alpha() noexcept {
             auto const start = position;
 
             // Digits can be part of an identifier, but not at the beginning
             // of an identifier
-            while (std::isalpha(current()) || std::isdigit(current())) {
+            while (std::isalpha(current()) || std::isdigit(current()) || current() == '_') {
                 next();
             }
 
@@ -211,12 +220,10 @@ namespace compiler {
             while (std::isdigit(current())) {
                 next();
             }
-            
+
             auto const length = position - start;
             return std::make_shared<syntax_token>(syntax_kind::literal_token, start, text.substr(start, length));
         }
-
-    private:
     };
 
     using lexer = lexical_analyzer;
