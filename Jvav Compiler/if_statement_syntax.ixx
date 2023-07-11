@@ -30,7 +30,11 @@ namespace compiler {
 
         virtual std::vector<std::shared_ptr<syntax_node>> const children() const noexcept override
         {
-            return { if_keyword,condition,then_statement,else_clause };
+            auto children = std::vector<std::shared_ptr<syntax_node>>{ if_keyword,condition,then_statement };
+            if (else_clause) {
+                children.emplace_back(else_clause);
+            }
+            return children;
         }
     };
 }
