@@ -10,8 +10,10 @@ export namespace compiler {
     private:
         std::vector<diagnostic> diagnostic;
 
-        constexpr void add_range(std::vector<compiler::diagnostic> const& range) noexcept {
-            diagnostic.insert(diagnostic.end(), range.begin(), range.end());
+        void add_range(std::vector<compiler::diagnostic> const& range) noexcept {
+            for (auto&& value : range) {
+                diagnostic.emplace_back(value);
+            }
         }
 
         void report(text_span const& span, std::string const& message) noexcept {
