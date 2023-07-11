@@ -20,11 +20,13 @@ namespace compiler {
 
         indent += is_last ? "   " : "©¦  ";
 
-        if (node->children().empty()) {
+        auto children = node->children();
+        if (children.empty()) {
             return;
         }
-        auto const last_child = node->children().back();
-        for (auto&& child : node->children()) {
+
+        auto const& last_child = children.back();
+        for (auto&& child : children) {
             pretty_print(stream, child, indent, child == last_child);
         }
     }

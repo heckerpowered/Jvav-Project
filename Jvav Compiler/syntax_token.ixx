@@ -10,7 +10,7 @@ namespace compiler {
     public:
         syntax_kind const syntax_kind;
         std::size_t const position;
-        std::string_view const text; 
+        std::string const text; 
 
         [[nodiscard]] syntax_token(compiler::syntax_kind const kind, std::size_t const position, std::string_view const& text)
             noexcept : syntax_kind(kind), position(position), text(text) {}
