@@ -25,7 +25,7 @@ namespace compiler {
 
         virtual std::vector<std::shared_ptr<syntax_node>> const children() const noexcept override
         {
-            return { else_keyword,else_statement };
+            return { else_keyword, else_statement };
         }
     };
 }
