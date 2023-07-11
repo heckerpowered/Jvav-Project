@@ -15,8 +15,8 @@ namespace compiler {
         std::shared_ptr<expression_syntax> const condition;
         std::shared_ptr<statement_syntax> const body;
 
-        [[nodiscard]] while_statement_syntax(std::shared_ptr<syntax_token> const& keyword, 
-            std::shared_ptr<expression_syntax> const& condition, std::shared_ptr<statement_syntax> const& body) 
+        [[nodiscard]] while_statement_syntax(std::shared_ptr<syntax_token> const& keyword,
+            std::shared_ptr<expression_syntax> const& condition, std::shared_ptr<statement_syntax> const& body)
             noexcept : keyword(keyword), condition(condition), body(body) {}
 
         virtual syntax_kind kind() const noexcept override

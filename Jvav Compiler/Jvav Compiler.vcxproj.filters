@@ -31,6 +31,9 @@
     <Filter Include="benchmark">
       <UniqueIdentifier>{c01f67b1-0bae-4bda-a5c1-0e6554267c28}</UniqueIdentifier>
     </Filter>
+    <Filter Include="code analysis\binding">
+      <UniqueIdentifier>{f54f6a40-c5e9-4b36-8220-54ef4e9e72db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.ixx" />
@@ -135,6 +138,9 @@
     </ClCompile>
     <ClCompile Include="syntax_tree.ixx">
       <Filter>code analysis\syntax</Filter>
+    </ClCompile>
+    <ClCompile Include="binder.ixx">
+      <Filter>code analysis\binding</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

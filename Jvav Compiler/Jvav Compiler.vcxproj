@@ -171,6 +171,7 @@
     <ClCompile Include="assignment_expression_syntax.ixx" />
     <ClCompile Include="benchmark.ixx" />
     <ClCompile Include="binary_expression_syntax.ixx" />
+    <ClCompile Include="binder.ixx" />
     <ClCompile Include="block_statement_syntax.ixx" />
     <ClCompile Include="boolean_literal_expression_syntax.ixx" />
     <ClCompile Include="else_clause_syntax.ixx" />
