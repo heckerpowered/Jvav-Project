@@ -11,7 +11,7 @@ export namespace compiler {
         std::vector<diagnostic> diagnostic;
 
         constexpr void add_range(std::vector<compiler::diagnostic> const& range) noexcept {
-            diagnostic.append_range(range);
+            diagnostic.insert(diagnostic.end(), range.begin(), range.end());
         }
 
         void report(text_span const& span, std::string const& message) noexcept {
