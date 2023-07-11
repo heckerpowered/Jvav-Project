@@ -32,7 +32,7 @@ namespace compiler {
 
         virtual std::vector<std::shared_ptr<syntax_node>> const children() const noexcept override
         {
-            auto children = std::vector<std::shared_ptr<syntax_node>>(statements.size() + 2);
+            auto children = std::vector<std::shared_ptr<syntax_node>>();
             children.emplace_back(open_brace_token);
             children.insert(children.end(), statements.begin(), statements.end());
             children.emplace_back(close_brace_token);
