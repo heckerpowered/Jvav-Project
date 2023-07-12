@@ -1,12 +1,14 @@
-export module compiler.diagnostics;
+export module compiler.diagnostic_list;
 
 import std;
+
+import compiler.syntax_kind;
 import compiler.diagnostic;
 import compiler.text_span;
-import compiler.syntax_kind;
+import compiler.zero_copy;
 
-export namespace compiler {
-    export class diagnostics final {
+namespace compiler {
+    export class diagnostic_list final {
     private:
         std::vector<diagnostic> diagnostic;
 
@@ -18,8 +20,7 @@ export namespace compiler {
         }
 
         void report(text_span const& span, std::string const& message) noexcept {
-            auto diagnostic = compiler::diagnostic{ span, message };
-            this->diagnostic.push_back(diagnostic);
+            diagnostic.emplace_back(span, message); 
             std::cout << message << std::endl;
         }
 
@@ -36,7 +37,7 @@ export namespace compiler {
             return diagnostic.empty();
         }
 
-        void report_unexpected_token(text_span const& span, syntax_kind const actual_kind,
+        void report_unexpected_token(text_span const& span, syntax_kind const actual_kind, 
             syntax_kind const expected_kind) noexcept {
             // Formatting makes IntelliSense crash, Visual Studio 2022 17.7.0 Preview 2
 #ifndef __INTELLISENSE__

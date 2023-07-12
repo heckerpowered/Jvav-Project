@@ -22,7 +22,7 @@ import compiler.lexical_analyzer;
 import compiler.syntax_token;
 import compiler.syntax_facts;
 import compiler.source_text;
-import compiler.diagnostics;
+import compiler.diagnostic_list;
 import compiler.syntax_kind;
 import compiler.diagnostic;
 import compiler.zero_copy;
@@ -32,13 +32,13 @@ namespace compiler {
     private:
         std::vector<std::shared_ptr<syntax_token>> tokens;
         std::size_t position;
-        diagnostics& diagnostics;
+        diagnostic_list& diagnostic_list;
 
     public:
-        [[nodiscard]] parser(std::shared_ptr<source_text> const& text, compiler::diagnostics& diagnostics) 
-            noexcept : position(), diagnostics(diagnostics) {
+        [[nodiscard]] parser(std::shared_ptr<source_text> const& text, compiler::diagnostic_list& diagnostic_list) 
+            noexcept : position(), diagnostic_list(diagnostic_list) {
             auto tokens = std::vector<std::shared_ptr<syntax_token>>();
-            auto analyzer = lexical_analyzer(text->text, diagnostics);
+            auto analyzer = lexical_analyzer(text->text, diagnostic_list);
             while (true) {
                 auto token = analyzer.analyze();
                 if (token->kind() != syntax_kind::whitespace_token &&
@@ -79,7 +79,7 @@ namespace compiler {
                 return next_token();
             }
 
-            diagnostics.report_unexpected_token(current()->span(), current()->kind(), kind);
+            diagnostic_list.report_unexpected_token(current()->span(), current()->kind(), kind);
             return std::make_shared<syntax_token>(kind, current()->position, "");
         }
 

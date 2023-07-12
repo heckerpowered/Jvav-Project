@@ -5,18 +5,18 @@ import std;
 import compiler.syntax_facts;
 import compiler.syntax_token;
 import compiler.syntax_kind;
-import compiler.diagnostics;
+import compiler.diagnostic_list;
 
 namespace compiler {
     export class lexical_analyzer {
     private:
         std::string_view const text;
         std::size_t position;
-        diagnostics& diagnostics;
+        diagnostic_list& diagnostic_list;
 
     public:
-        [[nodiscard]] lexical_analyzer(std::string_view const& text, compiler::diagnostics& diagnostics) 
-            noexcept : text(text), position(), diagnostics(diagnostics) {}
+        [[nodiscard]] lexical_analyzer(std::string_view const& text, compiler::diagnostic_list& diagnostic_list) 
+            noexcept : text(text), position(), diagnostic_list(diagnostic_list) {}
 
     private:
         [[nodiscard]] char current() noexcept {
@@ -184,7 +184,7 @@ namespace compiler {
             auto const length = position - start;
             auto const text = this->text.substr(start, length);
             if (kind == syntax_kind::bad_token) {
-                diagnostics.report_bad_character(text_span(start, length), current());
+                diagnostic_list.report_bad_character(text_span(start, length), current());
                 next();
             }
             return std::make_shared<syntax_token>(kind, start, text);

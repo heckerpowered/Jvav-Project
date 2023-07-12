@@ -55,7 +55,7 @@
     <ClCompile Include="text_span.ixx">
       <Filter>code analysis\text</Filter>
     </ClCompile>
-    <ClCompile Include="diagnostics.ixx">
+    <ClCompile Include="diagnostic_list.ixx">
       <Filter>code analysis\text</Filter>
     </ClCompile>
     <ClCompile Include="diagnostic.ixx">

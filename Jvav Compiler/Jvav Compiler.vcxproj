@@ -184,7 +184,7 @@
     <ClCompile Include="variable_declaration_syntax.ixx" />
     <ClCompile Include="compilation_unit_syntax.ixx" />
     <ClCompile Include="diagnostic.ixx" />
-    <ClCompile Include="diagnostics.ixx" />
+    <ClCompile Include="diagnostic_list.ixx" />
     <ClCompile Include="command_user_interface.ixx" />
     <ClCompile Include="expression_syntax.ixx" />
     <ClCompile Include="lexical_analyzer.ixx" />
