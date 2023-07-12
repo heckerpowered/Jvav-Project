@@ -19,7 +19,7 @@ export namespace compiler {
         void report(text_span const& span, std::string const& message) noexcept {
             auto diagnostic = compiler::diagnostic{ span, message };
             this->diagnostic.push_back(diagnostic);
-            std::cout << message << std::endl;
+            std::cout << message  << std::endl;
         }
 
     public:
