@@ -15,7 +15,7 @@ namespace compiler {
         std::vector<std::shared_ptr<statement_syntax>> const statements;
         std::shared_ptr<syntax_token> const close_brace_token;
 
-        [[nodiscard]] block_statement_syntax(std::shared_ptr<syntax_token> const& open_brace_token,
+        [[nodiscard]] block_statement_syntax(std::shared_ptr<syntax_token> const& open_brace_token, 
             std::vector<std::shared_ptr<statement_syntax>> const& statements,
             std::shared_ptr<syntax_token> const& close_brace_token)  noexcept :
             open_brace_token(open_brace_token), statements(statements), close_brace_token(close_brace_token) {}
