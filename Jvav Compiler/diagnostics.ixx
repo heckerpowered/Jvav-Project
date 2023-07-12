@@ -32,6 +32,10 @@ export namespace compiler {
             return diagnostic.end();
         }
 
+        [[nodiscard]] constexpr auto empty() const noexcept {
+            return diagnostic.empty();
+        }
+
         void report_unexpected_token(text_span const& span, syntax_kind const actual_kind,
             syntax_kind const expected_kind) noexcept {
             // Formatting makes IntelliSense crash, Visual Studio 2022 17.7.0 Preview 2
