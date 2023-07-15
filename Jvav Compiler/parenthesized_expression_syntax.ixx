@@ -30,7 +30,7 @@ namespace compiler
 			return syntax_kind::parenthesized_expression;
 		}
 
-		const std::vector<std::shared_ptr<syntax_node>> children() const noexcept override
+		std::vector<std::shared_ptr<syntax_node>> children() const noexcept override
 		{
 			return {open_parenthesis_token, expression, close_parenthesis_token};
 		}

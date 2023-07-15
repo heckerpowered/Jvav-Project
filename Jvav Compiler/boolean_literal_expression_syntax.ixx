@@ -24,7 +24,7 @@ namespace compiler
 			return syntax_kind::boolean_literal_expression;
 		}
 
-		const std::vector<std::shared_ptr<syntax_node>> children() const noexcept override
+		std::vector<std::shared_ptr<syntax_node>> children() const noexcept override
 		{
 			return {literal_token};
 		}

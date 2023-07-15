@@ -21,12 +21,12 @@ namespace compiler
 		{
 		}
 
-		virtual syntax_kind kind() const noexcept override
+		syntax_kind kind() const noexcept override
 		{
 			return syntax_kind::unary_expression;
 		}
 
-		virtual const std::vector<std::shared_ptr<syntax_node>> children() const noexcept override
+		const std::vector<std::shared_ptr<syntax_node>> children() const noexcept override
 		{
 			return {operator_token, operand};
 		}

@@ -43,7 +43,7 @@ namespace compiler
 		case bound_node_kind::for_statement:
 			return "ForStatement";
 		default:
-			return "Unknow";
+			return "Unknown";
 		}
 	}
 }

@@ -46,7 +46,7 @@ namespace compiler
 
 	std::array<bound_binary_operator, 20> bound_binary_operator::operators = {
 		bound_binary_operator(syntax_kind::plus_token, bound_binary_operator_kind::addition, int_type),
-		bound_binary_operator(syntax_kind::minus_token, bound_binary_operator_kind::subtration, int_type),
+		bound_binary_operator(syntax_kind::minus_token, bound_binary_operator_kind::subtraction, int_type),
 		bound_binary_operator(syntax_kind::multiplication_token, bound_binary_operator_kind::multiplication, int_type),
 		bound_binary_operator(syntax_kind::slash_token, bound_binary_operator_kind::division, int_type),
 		bound_binary_operator(syntax_kind::equals_equals_token, bound_binary_operator_kind::equals, int_type,

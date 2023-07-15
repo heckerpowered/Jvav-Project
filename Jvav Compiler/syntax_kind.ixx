@@ -167,14 +167,7 @@ namespace compiler
 		case syntax_kind::for_keyword:
 			return "ForKeyword";
 		default:
-			if constexpr (std::is_constant_evaluated())
-			{
-				return "Unknow";
-			}
-			else
-			{
-				std::terminate();
-			}
+			return "Unknown";
 		}
 	}
 }

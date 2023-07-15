@@ -35,7 +35,7 @@ namespace compiler
 			return syntax_kind::block_statement;
 		}
 
-		const std::vector<std::shared_ptr<syntax_node>> children() const noexcept override
+		std::vector<std::shared_ptr<syntax_node>> children() const noexcept override
 		{
 			auto children = std::vector<std::shared_ptr<syntax_node>>();
 			children.emplace_back(open_brace_token);

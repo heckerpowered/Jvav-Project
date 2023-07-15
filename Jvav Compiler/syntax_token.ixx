@@ -22,17 +22,17 @@ namespace compiler
 
 		syntax_token(const syntax_token&) = default;
 
-		virtual text_span span() const noexcept override
+		text_span span() const noexcept override
 		{
 			return {position, text.length()};
 		}
 
-		virtual compiler::syntax_kind kind() const noexcept override
+		compiler::syntax_kind kind() const noexcept override
 		{
 			return syntax_kind;
 		}
 
-		virtual const std::vector<std::shared_ptr<syntax_node>> children() const noexcept override
+		std::vector<std::shared_ptr<syntax_node>> children() const noexcept override
 		{
 			return {};
 		}

@@ -22,7 +22,7 @@ namespace compiler
 			return syntax_kind::expression_statement;
 		}
 
-		const std::vector<std::shared_ptr<syntax_node>> children() const noexcept override
+		std::vector<std::shared_ptr<syntax_node>> children() const noexcept override
 		{
 			return {expression};
 		}

@@ -34,7 +34,7 @@ namespace compiler
 			return syntax_kind::variable_declaration;
 		}
 
-		const std::vector<std::shared_ptr<syntax_node>> children() const noexcept override
+		std::vector<std::shared_ptr<syntax_node>> children() const noexcept override
 		{
 			return {type_identifier_token, identifier_token, equals_token, initializer};
 		}

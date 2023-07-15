@@ -5,7 +5,7 @@ namespace compiler
 	export enum class bound_binary_operator_kind
 	{
 		addition,
-		subtration,
+		subtraction,
 		multiplication,
 		division,
 		logical_and,

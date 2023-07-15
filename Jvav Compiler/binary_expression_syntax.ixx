@@ -28,7 +28,7 @@ namespace compiler
 			return syntax_kind::binary_expression;
 		}
 
-		const std::vector<std::shared_ptr<syntax_node>> children() const noexcept override
+		std::vector<std::shared_ptr<syntax_node>> children() const noexcept override
 		{
 			return {left, operator_token, right};
 		}

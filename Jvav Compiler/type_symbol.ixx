@@ -15,7 +15,7 @@ namespace compiler
 		{
 		}
 
-		virtual symbol_kind kind() const noexcept override
+		symbol_kind kind() const noexcept override
 		{
 			return symbol_kind::type;
 		}

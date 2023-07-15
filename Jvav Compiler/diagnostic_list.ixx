@@ -11,7 +11,6 @@ namespace compiler
 {
 	export class diagnostic_list final
 	{
-	private:
 		std::vector<diagnostic> diagnostic;
 
 		void add_range(const std::vector<compiler::diagnostic>& range) noexcept
