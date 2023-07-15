@@ -25,14 +25,32 @@
     <Filter Include="utility">
       <UniqueIdentifier>{1df0cc4b-a423-4cf0-b621-e51d603c48ab}</UniqueIdentifier>
     </Filter>
-    <Filter Include="command">
-      <UniqueIdentifier>{b28fd7de-c8af-45d3-a0b6-df7f9c932ef7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="benchmark">
       <UniqueIdentifier>{c01f67b1-0bae-4bda-a5c1-0e6554267c28}</UniqueIdentifier>
     </Filter>
     <Filter Include="code analysis\binding">
       <UniqueIdentifier>{f54f6a40-c5e9-4b36-8220-54ef4e9e72db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="code analysis\binding\expression">
+      <UniqueIdentifier>{e8c2f594-64df-43c4-a70f-a33124e593e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="code analysis\binding\statement">
+      <UniqueIdentifier>{d4f6bb24-914d-484b-b438-c5e766026821}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="code analysis\symbols">
+      <UniqueIdentifier>{4d7954b2-1407-4d2e-b699-eadba6b84fe3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="runtime">
+      <UniqueIdentifier>{f5d53fd9-793d-4f40-bcaf-eca1e8a86ca5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="user interface">
+      <UniqueIdentifier>{b28fd7de-c8af-45d3-a0b6-df7f9c932ef7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="user interface\console">
+      <UniqueIdentifier>{6b5d477b-4a76-4aba-a371-13c92f7a88c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="user interface\command">
+      <UniqueIdentifier>{45e85202-00b7-4165-bbf2-9d43488876db}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -55,17 +73,11 @@
     <ClCompile Include="text_span.ixx">
       <Filter>code analysis\text</Filter>
     </ClCompile>
-    <ClCompile Include="diagnostic_list.ixx">
-      <Filter>code analysis\text</Filter>
-    </ClCompile>
-    <ClCompile Include="diagnostic.ixx">
-      <Filter>code analysis\text</Filter>
-    </ClCompile>
     <ClCompile Include="argument_solver.ixx">
-      <Filter>command</Filter>
+      <Filter>user interface</Filter>
     </ClCompile>
     <ClCompile Include="command_user_interface.ixx">
-      <Filter>command</Filter>
+      <Filter>user interface</Filter>
     </ClCompile>
     <ClCompile Include="syntax_facts.ixx">
       <Filter>code analysis\syntax</Filter>
@@ -141,6 +153,87 @@
     </ClCompile>
     <ClCompile Include="binder.ixx">
       <Filter>code analysis\binding</Filter>
+    </ClCompile>
+    <ClCompile Include="bound_scope.ixx">
+      <Filter>code analysis\binding</Filter>
+    </ClCompile>
+    <ClCompile Include="diagnostic_list.ixx">
+      <Filter>code analysis</Filter>
+    </ClCompile>
+    <ClCompile Include="diagnostic.ixx">
+      <Filter>code analysis</Filter>
+    </ClCompile>
+    <ClCompile Include="bound_node.ixx">
+      <Filter>code analysis\binding</Filter>
+    </ClCompile>
+    <ClCompile Include="bound_node_kind.ixx">
+      <Filter>code analysis\binding</Filter>
+    </ClCompile>
+    <ClCompile Include="bound_expression.ixx">
+      <Filter>code analysis\binding\expression</Filter>
+    </ClCompile>
+    <ClCompile Include="bound_expression_statement.ixx">
+      <Filter>code analysis\binding\statement</Filter>
+    </ClCompile>
+    <ClCompile Include="bound_statement.ixx">
+      <Filter>code analysis\binding\statement</Filter>
+    </ClCompile>
+    <ClCompile Include="bound_assignment_expression.ixx">
+      <Filter>code analysis\binding\expression</Filter>
+    </ClCompile>
+    <ClCompile Include="symbol.ixx">
+      <Filter>code analysis\symbols</Filter>
+    </ClCompile>
+    <ClCompile Include="pretty_print_syntax.ixx">
+      <Filter>code analysis\syntax</Filter>
+    </ClCompile>
+    <ClCompile Include="pretty_print_binding.ixx">
+      <Filter>code analysis\binding</Filter>
+    </ClCompile>
+    <ClCompile Include="symbol_kind.ixx">
+      <Filter>code analysis\symbols</Filter>
+    </ClCompile>
+    <ClCompile Include="type_symbol.ixx">
+      <Filter>code analysis\symbols</Filter>
+    </ClCompile>
+    <ClCompile Include="variable_symbol.ixx">
+      <Filter>code analysis\symbols</Filter>
+    </ClCompile>
+    <ClCompile Include="pretty_print_symbol.ixx">
+      <Filter>code analysis\symbols</Filter>
+    </ClCompile>
+    <ClCompile Include="bound_binary_operator.ixx">
+      <Filter>code analysis\binding\expression</Filter>
+    </ClCompile>
+    <ClCompile Include="bound_binary_operator_kind.ixx">
+      <Filter>code analysis\binding\expression</Filter>
+    </ClCompile>
+    <ClCompile Include="bound_block_statement.ixx">
+      <Filter>code analysis\binding\statement</Filter>
+    </ClCompile>
+    <ClCompile Include="runtime.ixx">
+      <Filter>runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="windows_runtime.ixx">
+      <Filter>runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="console_color.ixx">
+      <Filter>user interface\console</Filter>
+    </ClCompile>
+    <ClCompile Include="console_color_windows.ixx">
+      <Filter>user interface\console</Filter>
+    </ClCompile>
+    <ClCompile Include="console_color_implement.ixx">
+      <Filter>user interface\console</Filter>
+    </ClCompile>
+    <ClCompile Include="command.ixx">
+      <Filter>user interface\command</Filter>
+    </ClCompile>
+    <ClCompile Include="eval_command.ixx">
+      <Filter>user interface\command</Filter>
+    </ClCompile>
+    <ClCompile Include="command_user_interface_windows.ixx">
+      <Filter>user interface</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,5 +1,5 @@
 export module compiler.benchmark;
 
-namespace compiler {
-
+namespace compiler
+{
 }

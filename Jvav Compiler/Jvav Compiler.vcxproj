@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -170,17 +170,40 @@
     <ClCompile Include="argument_solver.ixx" />
     <ClCompile Include="assignment_expression_syntax.ixx" />
     <ClCompile Include="benchmark.ixx" />
+    <ClCompile Include="command.ixx" />
     <ClCompile Include="binary_expression_syntax.ixx" />
     <ClCompile Include="binder.ixx" />
     <ClCompile Include="block_statement_syntax.ixx" />
     <ClCompile Include="boolean_literal_expression_syntax.ixx" />
+    <ClCompile Include="bound_assignment_expression.ixx" />
+    <ClCompile Include="bound_binary_operator.ixx" />
+    <ClCompile Include="bound_binary_operator_kind.ixx" />
+    <ClCompile Include="bound_block_statement.ixx" />
+    <ClCompile Include="bound_expression_statement.ixx" />
+    <ClCompile Include="bound_expression.ixx" />
+    <ClCompile Include="bound_node.ixx" />
+    <ClCompile Include="bound_node_kind.ixx" />
+    <ClCompile Include="bound_scope.ixx" />
+    <ClCompile Include="bound_statement.ixx" />
+    <ClCompile Include="command_user_interface_windows.ixx" />
+    <ClCompile Include="console_color.ixx" />
+    <ClCompile Include="console_color_implement.ixx" />
+    <ClCompile Include="console_color_windows.ixx" />
     <ClCompile Include="else_clause_syntax.ixx" />
+    <ClCompile Include="eval_command.ixx" />
     <ClCompile Include="expression_statement_syntax.ixx" />
     <ClCompile Include="for_statement_syntax.ixx" />
     <ClCompile Include="if_statement_syntax.ixx" />
     <ClCompile Include="parenthesized_expression_syntax.ixx" />
     <ClCompile Include="pretty_print.ixx" />
+    <ClCompile Include="pretty_print_binding.ixx" />
+    <ClCompile Include="pretty_print_symbol.ixx" />
+    <ClCompile Include="runtime.ixx" />
+    <ClCompile Include="symbol.ixx" />
+    <ClCompile Include="pretty_print_syntax.ixx" />
+    <ClCompile Include="symbol_kind.ixx" />
     <ClCompile Include="syntax_tree.ixx" />
+    <ClCompile Include="type_symbol.ixx" />
     <ClCompile Include="variable_declaration_syntax.ixx" />
     <ClCompile Include="compilation_unit_syntax.ixx" />
     <ClCompile Include="diagnostic.ixx" />
@@ -201,7 +224,9 @@
     <ClCompile Include="text_line.ixx" />
     <ClCompile Include="text_span.ixx" />
     <ClCompile Include="unary_expression_syntax.ixx" />
+    <ClCompile Include="variable_symbol.ixx" />
     <ClCompile Include="while_statement_syntax.ixx" />
+    <ClCompile Include="windows_runtime.ixx" />
     <ClCompile Include="zero_copy.ixx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
