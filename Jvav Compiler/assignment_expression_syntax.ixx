@@ -28,7 +28,7 @@ namespace compiler
 			return syntax_kind::assignment_expression;
 		}
 
-		const std::vector<std::shared_ptr<syntax_node>> children() const noexcept override
+		std::vector<std::shared_ptr<syntax_node>> children() const noexcept override
 		{
 			return {identifier_token, equals_token, expression};
 		}

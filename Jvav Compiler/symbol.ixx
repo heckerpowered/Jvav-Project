@@ -16,6 +16,10 @@ namespace compiler
 		{
 		}
 
+		virtual ~symbol() noexcept
+		{
+		}
+
 	public:
 		[[nodiscard]] virtual symbol_kind kind() const noexcept = 0;
 	};

@@ -12,8 +12,8 @@ namespace compiler
 	{
 	private:
 		[[nodiscard]] bound_binary_operator(const syntax_kind syntax_kind, const bound_binary_operator_kind kind,
-		                                    const type_symbol& type) noexcept : bound_binary_operator(
-			syntax_kind, kind, type, type)
+		                                    const type_symbol& type) noexcept : 
+			bound_binary_operator(syntax_kind, kind, type, type)
 		{
 		}
 

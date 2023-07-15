@@ -13,7 +13,7 @@ namespace compiler
 #ifdef _WIN32
 	struct service_handle_deleter
 	{
-		void operator()(SC_HANDLE* handle) const noexcept
+		void operator()(SC_HANDLE const* handle) const noexcept
 		{
 			if (handle && *handle)
 			{

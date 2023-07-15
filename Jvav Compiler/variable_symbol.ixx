@@ -19,5 +19,10 @@ namespace compiler
 			noexcept : super(name), is_read_only(is_read_only), type(type)
 		{
 		}
+
+		symbol_kind kind() const noexcept override
+		{
+			return symbol_kind::local_variable;
+		};
 	};
 }

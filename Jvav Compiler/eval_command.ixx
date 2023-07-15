@@ -5,7 +5,6 @@ import std;
 import compiler.pretty_print;
 import compiler.syntax_tree;
 import compiler.zero_copy;
-#include <vector>
 
 namespace compiler
 {

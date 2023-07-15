@@ -13,6 +13,10 @@ namespace compiler
 		[[nodiscard]] virtual syntax_kind kind() const noexcept = 0;
 		[[nodiscard]] virtual std::vector<std::shared_ptr<syntax_node>> children() const noexcept = 0;
 
+		virtual ~syntax_node() noexcept
+		{
+		}
+
 		virtual text_span span() const noexcept
 		{
 			const auto children = this->children();

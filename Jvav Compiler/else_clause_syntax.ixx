@@ -27,7 +27,7 @@ namespace compiler
 			return syntax_kind::else_clause;
 		}
 
-		const std::vector<std::shared_ptr<syntax_node>> children() const noexcept override
+		std::vector<std::shared_ptr<syntax_node>> children() const noexcept override
 		{
 			return {else_keyword, else_statement};
 		}

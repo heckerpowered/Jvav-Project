@@ -26,7 +26,7 @@ namespace compiler
 			return syntax_kind::compilation_unit;
 		}
 
-		const std::vector<std::shared_ptr<syntax_node>> children() const noexcept override
+		std::vector<std::shared_ptr<syntax_node>> children() const noexcept override
 		{
 			return {statement, end_of_file_token};
 		}

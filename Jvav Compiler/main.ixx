@@ -1,10 +1,22 @@
-﻿import std;
+﻿module;
+
+#ifdef DEBUG
+#include <crtdbg.h>
+#endif // DEBUG
+
+export module compiler.main;
+
+import std;
 
 import compiler.argument_solver;
 import compiler.command_user_interface;
 
-int main(int argument_count, char* arguments[]) noexcept
+export int main(int argument_count, char* arguments[]) noexcept
 {
+#ifdef DEBUG
+	_CrtSetDbgFlag(_CrtSetDbgFlag(_CRTDBG_REPORT_FLAG) | _CRTDBG_LEAK_CHECK_DF);
+#endif // DEBUG
+
 	std::vector<std::string_view> startup_arguments;
 	for (auto i = 1; i < argument_count; ++i)
 	{
@@ -28,6 +40,9 @@ int main(int argument_count, char* arguments[]) noexcept
 			"Jvav is a programming language first proposed by Dr. Haoyang Zhang and implemented by Mr. Rick Astley." <<
 			std::endl;
 		compiler::command_user_interface::launch();
+#ifdef DEBUG
+		_CrtDumpMemoryLeaks();
+#endif // DEBUG
 		return 0;
 	}
 
@@ -37,4 +52,6 @@ int main(int argument_count, char* arguments[]) noexcept
 		std::cout << "Error: No source files" << std::endl;
 		return 0;
 	}
+
+	return 0;
 }

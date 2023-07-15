@@ -24,12 +24,12 @@ namespace compiler
 		{
 		}
 
-		virtual syntax_kind kind() const noexcept override
+		syntax_kind kind() const noexcept override
 		{
 			return syntax_kind::while_statement;
 		}
 
-		virtual const std::vector<std::shared_ptr<syntax_node>> children() const noexcept override
+		std::vector<std::shared_ptr<syntax_node>> children() const noexcept override
 		{
 			return {keyword, condition, body};
 		}
