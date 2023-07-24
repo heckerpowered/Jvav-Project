@@ -22,7 +22,7 @@ namespace compiler
 
 		static text_span from_bounds(const std::size_t start, const std::size_t end) noexcept
 		{
-			const auto length = end - start;
+			const auto length{ end - start };
 			return text_span(start, length);
 		}
 	};

@@ -9,9 +9,10 @@ import compiler.source_text;
 import compiler.zero_copy;
 import compiler.command;
 import compiler.parser;
+import compiler.print;
 
 #ifdef _WIN32
-import :windows;
+export import :windows;
 #endif // _WIN32
 
 namespace compiler
@@ -36,15 +37,11 @@ namespace compiler
 		{
 			std::cin.sync_with_stdio(false);
 			std::cout.sync_with_stdio(false);
-			std::cout << std::endl;
-
-#ifdef _WIN32
-			launch_windows();
-#endif // _WIN32
+			// println("");
 
 			while (true)
 			{
-				std::cout << "> ";
+				// print("> ");
 				auto input = std::string();
 				std::getline(std::cin, input);
 
@@ -58,7 +55,8 @@ namespace compiler
 				const auto iterator = commands.find(command_name);
 				if (iterator == commands.end())
 				{
-					std::cout << "Command not found" << std::endl << std::endl;
+					// perrln("Command not found");
+					// perrln("");
 					continue;
 				}
 

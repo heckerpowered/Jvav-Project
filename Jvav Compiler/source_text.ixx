@@ -30,13 +30,13 @@ namespace compiler
 
 		[[nodiscard]] std::size_t get_line_index(const std::size_t position) noexcept
 		{
-			auto lower_bound = std::size_t();
-			auto upper_bound = lines.size() - 1;
+			auto lower_bound{ std::size_t() };
+			auto upper_bound{ lines.size() - 1 };
 
 			while (lower_bound <= upper_bound)
 			{
-				const auto index = lower_bound + (upper_bound - lower_bound) / 2;
-				const auto start = lines[index].start;
+				const auto index{ lower_bound + (upper_bound - lower_bound) / 2 };
+				const auto start{ lines[index].start };
 
 				if (position == start)
 				{
@@ -60,14 +60,14 @@ namespace compiler
 		static std::vector<text_line> parse_lines(const source_text& source_text,
 		                                          const std::string_view& text) noexcept
 		{
-			auto result = std::vector<text_line>();
+			auto result{ std::vector<text_line>() };
 
-			auto position = std::size_t();
-			auto line_start = std::size_t();
+			auto position{ std::size_t{} };
+			auto line_start{ std::size_t{} };
 
 			while (position < text.length())
 			{
-				const auto line_break_width = get_line_break_width(text, position);
+				const auto line_break_width{ get_line_break_width(text, position) };
 				if (line_break_width == 0)
 				{
 					++position;
@@ -92,15 +92,15 @@ namespace compiler
 		static void add_line(std::vector<text_line>& result, const source_text& source_text, const std::size_t position,
 		                     const std::size_t line_start, const std::size_t line_break_width) noexcept
 		{
-			const auto line_length = position - line_start;
-			auto line = text_line(source_text, line_start, line_length, line_break_width);
+			const auto line_length{ position - line_start };
+			auto line{ text_line(source_text, line_start, line_length, line_break_width) };
 			result.emplace_back(line);
 		}
 
 		static std::size_t get_line_break_width(const std::string_view& text, const std::size_t position) noexcept
 		{
-			const auto character = text[position];
-			const auto next_character = position + 1 >= text.length() ? '\0' : text[position + 1];
+			const auto character{ text[position] };
+			const auto next_character{ position + 1 >= text.length() ? '\0' : text[position + 1] };
 
 			if (character == '\r' && next_character == '\n')
 			{

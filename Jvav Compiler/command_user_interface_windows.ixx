@@ -4,27 +4,30 @@ module;
 #include <Windows.h>
 #endif // _WIN32
 
+export module compiler.command_user_interface:windows;
+
 import std;
 
-export module compiler.command_user_interface:windows;
+import compiler.console_color;
+import compiler.print;
 
 namespace compiler
 {
-	void launch_windows() noexcept
+	export void launch_windows() noexcept
 	{
 		const auto output_handle = GetStdHandle(STD_OUTPUT_HANDLE);
 		if (output_handle == INVALID_HANDLE_VALUE)
 		{
-			std::cerr << "init> cannot launch windows user interface" << std::endl
-				<< "init> " << std::error_code(GetLastError(), std::system_category()).message() << std::endl;
+			// perrln("init> cannot launch windows user interface");
+			// perrln("init> ", std::error_code(GetLastError(), std::system_category()).message());
 			return;
 		}
 
 		auto console_mode = DWORD();
 		if (!GetConsoleMode(output_handle, &console_mode))
 		{
-			std::cerr << "init> cannot launch windows user interface" << std::endl
-				<< "init> " << std::error_code(GetLastError(), std::system_category()).message() << std::endl;
+			// perrln("init> cannot launch windows user interface");
+			// perrln(std::error_code(GetLastError(), std::system_category()).message());
 			return;
 		}
 
@@ -36,8 +39,9 @@ namespace compiler
 
 		if (!SetConsoleMode(output_handle, console_mode))
 		{
-			std::cerr << "init> cannot launch windows user interface" << std::endl
-				<< "init> " << std::error_code(GetLastError(), std::system_category()).message() << std::endl;
+			// perrln("init> cannot launch windows user interface");
+			// perrln(std::error_code(GetLastError(), std::system_category()).message());
+			return;
 		}
 	}
 }

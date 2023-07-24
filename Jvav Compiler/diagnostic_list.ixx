@@ -49,8 +49,8 @@ namespace compiler
 		{
 			// Formatting makes IntelliSense crash, Visual Studio 2022 17.7.0 Preview 2
 #ifndef __INTELLISENSE__
-			const auto message = std::format("Unexpected token {}, expected {}", compiler::to_string(actual_kind),
-			                                 compiler::to_string(expected_kind));
+			const auto message{ std::format("Unexpected token {}, expected {}", compiler::to_string(actual_kind),
+											 compiler::to_string(expected_kind)) };
 			report(span, message);
 #endif // __INTELLISENSE__
 		}
@@ -59,7 +59,7 @@ namespace compiler
 		{
 			// Formatting makes IntelliSense crash, Visual Studio 2022 17.7.0 Preview 2
 #ifndef __INTELLISENSE__
-			const auto message = std::format("Bad character input {}", character);
+			const auto message{ std::format("Bad character input {}", character) };
 			report(span, message);
 #endif // __INTELLISENSE__
 		}

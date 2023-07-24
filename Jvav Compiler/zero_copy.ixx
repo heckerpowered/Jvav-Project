@@ -4,31 +4,31 @@ import std;
 
 namespace compiler
 {
-	export template <typename T>
+	export template <typename stream_type>
 	struct zero_copy final
 	{
-		T hatcher;
+		stream_type hatcher;
 
-		constexpr operator decltype(std::declval<T&>()())()
-			noexcept(noexcept(std::declval<T&>()())) requires std::same_as<zero_copy&, decltype(*this)>
+		constexpr operator decltype(std::declval<stream_type&>()())()
+			noexcept(noexcept(std::declval<stream_type&>()())) requires std::same_as<zero_copy&, decltype(*this)>
 		{
 			return hatcher();
 		}
 
-		constexpr operator decltype(std::declval<const T&>()())()
-			noexcept(noexcept(std::declval<const T&>()())) requires std::same_as<const zero_copy&, decltype(*this)>
+		constexpr operator decltype(std::declval<const stream_type&>()())()
+			noexcept(noexcept(std::declval<const stream_type&>()())) requires std::same_as<const zero_copy&, decltype(*this)>
 		{
 			return hatcher();
 		}
 
-		constexpr operator decltype(std::declval<T&&>()())()
-			noexcept(noexcept(std::declval<T&&>()())) requires std::same_as<zero_copy&&, decltype(*this)>
+		constexpr operator decltype(std::declval<stream_type&&>()())()
+			noexcept(noexcept(std::declval<stream_type&&>()())) requires std::same_as<zero_copy&&, decltype(*this)>
 		{
 			return std::move(hatcher)();
 		}
 
-		constexpr operator decltype(std::declval<const T&&>()())()
-			noexcept(noexcept(std::declval<const T&&>()())) requires std::same_as<const zero_copy&&, decltype(*this)>
+		constexpr operator decltype(std::declval<const stream_type&&>()())()
+			noexcept(noexcept(std::declval<const stream_type&&>()())) requires std::same_as<const zero_copy&&, decltype(*this)>
 		{
 			return std::move(hatcher)();
 		}

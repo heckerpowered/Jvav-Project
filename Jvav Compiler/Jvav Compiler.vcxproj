@@ -85,6 +85,10 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <IntelJCCErratum>true</IntelJCCErratum>
       <EnableModules>true</EnableModules>
+      <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <BuildStlModules>true</BuildStlModules>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -112,6 +116,9 @@
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <StringPooling>true</StringPooling>
       <CallingConvention>FastCall</CallingConvention>
+      <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <BuildStlModules>true</BuildStlModules>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -131,6 +138,10 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <IntelJCCErratum>true</IntelJCCErratum>
       <EnableModules>true</EnableModules>
+      <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <BuildStlModules>true</BuildStlModules>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -158,6 +169,9 @@
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <StringPooling>true</StringPooling>
       <CallingConvention>FastCall</CallingConvention>
+      <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <BuildStlModules>true</BuildStlModules>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -170,6 +184,7 @@
     <ClCompile Include="argument_solver.ixx" />
     <ClCompile Include="assignment_expression_syntax.ixx" />
     <ClCompile Include="benchmark.ixx" />
+    <ClCompile Include="benchmark_command.ixx" />
     <ClCompile Include="command.ixx" />
     <ClCompile Include="binary_expression_syntax.ixx" />
     <ClCompile Include="binder.ixx" />
@@ -189,20 +204,30 @@
     <ClCompile Include="console_color.ixx" />
     <ClCompile Include="console_color_implement.ixx" />
     <ClCompile Include="console_color_windows.ixx" />
+    <ClCompile Include="console_category.ixx" />
+    <ClCompile Include="console_error.ixx" />
+    <ClCompile Include="console_target.ixx" />
     <ClCompile Include="else_clause_syntax.ixx" />
     <ClCompile Include="eval_command.ixx" />
     <ClCompile Include="expression_statement_syntax.ixx" />
+    <ClCompile Include="logger_level.ixx" />
+    <ClCompile Include="stream_target.ixx" />
     <ClCompile Include="for_statement_syntax.ixx" />
     <ClCompile Include="if_statement_syntax.ixx" />
+    <ClCompile Include="logger.ixx" />
+    <ClCompile Include="make_console_error.ixx" />
     <ClCompile Include="parenthesized_expression_syntax.ixx" />
     <ClCompile Include="pretty_print.ixx" />
     <ClCompile Include="pretty_print_binding.ixx" />
     <ClCompile Include="pretty_print_symbol.ixx" />
+    <ClCompile Include="print.ixx" />
     <ClCompile Include="runtime.ixx" />
+    <ClCompile Include="stringify.ixx" />
     <ClCompile Include="symbol.ixx" />
     <ClCompile Include="pretty_print_syntax.ixx" />
     <ClCompile Include="symbol_kind.ixx" />
     <ClCompile Include="syntax_tree.ixx" />
+    <ClCompile Include="target.ixx" />
     <ClCompile Include="type_symbol.ixx" />
     <ClCompile Include="variable_declaration_syntax.ixx" />
     <ClCompile Include="compilation_unit_syntax.ixx" />
@@ -225,6 +250,7 @@
     <ClCompile Include="text_span.ixx" />
     <ClCompile Include="unary_expression_syntax.ixx" />
     <ClCompile Include="variable_symbol.ixx" />
+    <ClCompile Include="warn_logger_level.ixx" />
     <ClCompile Include="while_statement_syntax.ixx" />
     <ClCompile Include="windows_runtime.ixx" />
     <ClCompile Include="zero_copy.ixx" />

@@ -10,12 +10,14 @@ namespace compiler
 	export class syntax_token : public syntax_node
 	{
 	public:
+		using super = syntax_node;
+
 		const syntax_kind syntax_kind;
 		const std::size_t position;
 		const std::string text;
 
 		[[nodiscard]] syntax_token(const compiler::syntax_kind kind, const std::size_t position,
-		                           const std::string_view& text)
+						           const std::string_view& text)
 			noexcept : syntax_kind(kind), position(position), text(text)
 		{
 		}
@@ -24,7 +26,7 @@ namespace compiler
 
 		text_span span() const noexcept override
 		{
-			return {position, text.length()};
+			return { position, text.length() };
 		}
 
 		compiler::syntax_kind kind() const noexcept override

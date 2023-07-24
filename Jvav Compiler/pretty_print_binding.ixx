@@ -15,7 +15,7 @@ namespace compiler
 	void pretty_print(std::ostream& stream, const std::shared_ptr<bound_node>& node, std::string indent = std::string(),
 	                  const bool is_last = true) noexcept
 	{
-		const auto token_marker = is_last ? "©¸©¤©¤" : "©À©¤©¤";
+		const auto token_marker{ is_last ? "©¸©¤©¤" : "©À©¤©¤" };
 
 		stream << indent << token_marker;
 
@@ -31,7 +31,7 @@ namespace compiler
 			return;
 		}
 
-		const auto& last_child = children.back();
+		const auto& last_child{ children.back() };
 		for (auto&& child : children)
 		{
 			pretty_print(stream, child, indent, child == last_child);

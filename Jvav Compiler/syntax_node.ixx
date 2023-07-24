@@ -19,9 +19,9 @@ namespace compiler
 
 		virtual text_span span() const noexcept
 		{
-			const auto children = this->children();
-			const auto first = children.front()->span();
-			const auto last = children.back()->span();
+			const auto children{ this->children() };
+			const auto first{ children.front()->span() };
+			const auto last{ children.back()->span() };
 
 			return text_span::from_bounds(first.start, last.start);
 		}

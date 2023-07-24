@@ -52,6 +52,24 @@
     <Filter Include="user interface\command">
       <UniqueIdentifier>{45e85202-00b7-4165-bbf2-9d43488876db}</UniqueIdentifier>
     </Filter>
+    <Filter Include="user interface\console\error">
+      <UniqueIdentifier>{dc838d25-08a7-4f88-9009-1121c4455b25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utility\logger">
+      <UniqueIdentifier>{f185f6fa-fc84-4c68-8e96-e224a80804f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utility\unit">
+      <UniqueIdentifier>{606d1464-b231-49db-b4af-390ca8acfbaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utility\print">
+      <UniqueIdentifier>{06af48a5-e675-4bea-b369-4fa4213af255}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utility\logger\tarrgets">
+      <UniqueIdentifier>{a721ae46-6ecc-4028-9bbf-0243b50133a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utility\logger\level">
+      <UniqueIdentifier>{7c19997d-e5c9-42de-802a-d2d8bc01edd2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.ixx" />
@@ -234,6 +252,42 @@
     </ClCompile>
     <ClCompile Include="command_user_interface_windows.ixx">
       <Filter>user interface</Filter>
+    </ClCompile>
+    <ClCompile Include="console_category.ixx">
+      <Filter>user interface\console\error</Filter>
+    </ClCompile>
+    <ClCompile Include="console_error.ixx">
+      <Filter>user interface\console\error</Filter>
+    </ClCompile>
+    <ClCompile Include="make_console_error.ixx">
+      <Filter>user interface\console\error</Filter>
+    </ClCompile>
+    <ClCompile Include="benchmark_command.ixx">
+      <Filter>user interface\command</Filter>
+    </ClCompile>
+    <ClCompile Include="logger.ixx">
+      <Filter>utility\logger</Filter>
+    </ClCompile>
+    <ClCompile Include="stringify.ixx">
+      <Filter>utility\logger</Filter>
+    </ClCompile>
+    <ClCompile Include="print.ixx">
+      <Filter>utility\print</Filter>
+    </ClCompile>
+    <ClCompile Include="target.ixx">
+      <Filter>utility\logger\tarrgets</Filter>
+    </ClCompile>
+    <ClCompile Include="console_target.ixx">
+      <Filter>utility\logger\tarrgets</Filter>
+    </ClCompile>
+    <ClCompile Include="stream_target.ixx">
+      <Filter>utility\logger\tarrgets</Filter>
+    </ClCompile>
+    <ClCompile Include="logger_level.ixx">
+      <Filter>utility\logger\level</Filter>
+    </ClCompile>
+    <ClCompile Include="warn_logger_level.ixx">
+      <Filter>utility\logger\level</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

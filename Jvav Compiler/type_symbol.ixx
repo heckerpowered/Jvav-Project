@@ -11,7 +11,7 @@ namespace compiler
 	public:
 		using super = symbol;
 
-		[[nodiscard]] type_symbol(const std::string& name) noexcept : super(name)
+		[[nodiscard]] type_symbol(const std::string& logger_name) noexcept : super(logger_name)
 		{
 		}
 

@@ -35,7 +35,7 @@ namespace compiler
 
 		[[nodiscard]] char peek(const std::size_t offset) noexcept
 		{
-			const auto index = position + offset;
+			const auto index{ position + offset };
 
 			if (index >= text.length())
 			{
@@ -53,8 +53,8 @@ namespace compiler
 	public:
 		std::shared_ptr<syntax_token> analyze() noexcept
 		{
-			const auto start = position;
-			auto kind = syntax_kind::bad_token;
+			const auto start{ position };
+			auto kind{ syntax_kind::bad_token };
 
 			switch (current())
 			{
@@ -192,25 +192,23 @@ namespace compiler
 				break;
 
 			default:
+				if (std::isdigit(current()))
 				{
-					if (std::isdigit(current()))
-					{
-						return analyze_number_token();
-					}
-					if (std::isspace(current()))
-					{
-						return analyze_whitespace();
-					}
-					if (std::isalpha(current()))
-					{
-						return analyze_alpha();
-					}
+					return analyze_number_token();
+				}
+				if (std::isspace(current()))
+				{
+					return analyze_whitespace();
+				}
+				if (std::isalpha(current()))
+				{
+					return analyze_alpha();
 				}
 			}
 
-			const auto length = position - start;
-			const auto text = this->text.substr(start, length);
-			if (kind == syntax_kind::bad_token)
+			const auto length{ position - start };
+			const auto text{ this->text.substr(start, length) };
+			if (kind == syntax_kind::bad_token) [[unlikely]]
 			{
 				diagnostic_list.report_bad_character(text_span(start, length), current());
 				next();
@@ -221,7 +219,7 @@ namespace compiler
 	private:
 		[[nodiscard]] std::shared_ptr<syntax_token> analyze_alpha() noexcept
 		{
-			const auto start = position;
+			const auto start{ position };
 
 			// Digits can be part of an identifier, but not at the beginning
 			// of an identifier
@@ -230,32 +228,32 @@ namespace compiler
 				next();
 			}
 
-			const auto length = position - start;
-			const auto text = this->text.substr(start, length);
+			const auto length{ position - start };
+			const auto text{ this->text.substr(start, length) };
 			return std::make_shared<syntax_token>(syntax_facts::get_keyword_kind(text), start, text);
 		}
 
 		[[nodiscard]] std::shared_ptr<syntax_token> analyze_whitespace() noexcept
 		{
-			const auto start = position;
+			const auto start{ position };
 			while (std::isspace(current()))
 			{
 				next();
 			}
 
-			const auto length = position - start;
+			const auto length{ position - start };
 			return std::make_shared<syntax_token>(syntax_kind::whitespace_token, start, text.substr(start, length));
 		}
 
 		[[nodiscard]] std::shared_ptr<syntax_token> analyze_number_token() noexcept
 		{
-			const auto start = position;
+			const auto start{ position };
 			while (std::isdigit(current()))
 			{
 				next();
 			}
 
-			const auto length = position - start;
+			const auto length{ position - start };
 			return std::make_shared<syntax_token>(syntax_kind::literal_token, start, text.substr(start, length));
 		}
 	};

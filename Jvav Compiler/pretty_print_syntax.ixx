@@ -11,7 +11,7 @@ namespace compiler
 	                  std::string indent = std::string(),
 	                  const bool is_last = true) noexcept
 	{
-		const auto token_marker = is_last ? "©¸©¤©¤" : "©À©¤©¤";
+		const auto token_marker{ is_last ? "©¸©¤©¤" : "©À©¤©¤" };
 
 		stream << indent << token_marker << to_string(node->kind());
 		if (const auto token = std::dynamic_pointer_cast<syntax_token>(node); token)
@@ -23,13 +23,13 @@ namespace compiler
 
 		indent += is_last ? "   " : "©¦  ";
 
-		auto children = node->children();
+		auto children{ node->children() };
 		if (children.empty())
 		{
 			return;
 		}
 
-		const auto& last_child = children.back();
+		const auto& last_child{ children.back() };
 		for (auto&& child : children)
 		{
 			pretty_print(stream, child, indent, child == last_child);
@@ -38,7 +38,7 @@ namespace compiler
 
 	export std::string to_string(const std::shared_ptr<syntax_node>& node) noexcept
 	{
-		auto stream = std::stringstream();
+		auto stream{ std::stringstream() };
 		pretty_print(stream, node);
 		return std::string(stream.str());
 	}

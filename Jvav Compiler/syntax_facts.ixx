@@ -22,7 +22,7 @@ namespace compiler
 	public:
 		static syntax_kind get_keyword_kind(const std::string_view& text) noexcept
 		{
-			const auto result = keyword_map.find(text);
+			const auto result{ keyword_map.find(text) };
 			if (result == keyword_map.end())
 			{
 				return syntax_kind::identifier_token;

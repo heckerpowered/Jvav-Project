@@ -30,22 +30,22 @@ namespace compiler
 	public:
 		std::expected<bool, std::error_code> is_runtime_ready() noexcept
 		{
-			const auto service_control_manager = std::unique_ptr<SC_HANDLE, service_handle_deleter>(
-				new SC_HANDLE(OpenSCManagerA(nullptr, nullptr, SC_MANAGER_ALL_ACCESS)));
+			const auto service_control_manager{ std::unique_ptr<SC_HANDLE, service_handle_deleter>(
+				new SC_HANDLE(OpenSCManagerA(nullptr, nullptr, SC_MANAGER_ALL_ACCESS))) };
 			if (!*service_control_manager)
 			{
 				return std::unexpected(std::error_code(GetLastError(), std::system_category()));
 			}
 
-			constexpr auto service_name = "Jvav Runtime";
-			const auto service = std::unique_ptr<SC_HANDLE, service_handle_deleter>(
-				new SC_HANDLE(OpenServiceA(*service_control_manager, service_name, SERVICE_ALL_ACCESS)));
+			constexpr auto service_name{ "Jvav Runtime" };
+			const auto service{ std::unique_ptr<SC_HANDLE, service_handle_deleter>(
+				new SC_HANDLE(OpenServiceA(*service_control_manager, service_name, SERVICE_ALL_ACCESS))) };
 			if (!*service)
 			{
 				return std::unexpected(std::error_code(GetLastError(), std::system_category()));
 			}
 
-			auto service_status = SERVICE_STATUS();
+			auto service_status{ SERVICE_STATUS{} };
 			if (!QueryServiceStatus(*service, &service_status))
 			{
 				return std::unexpected(std::error_code(GetLastError(), std::system_category()));

@@ -30,7 +30,7 @@ namespace compiler
 
 		std::vector<std::shared_ptr<bound_node>> children() const noexcept override
 		{
-			auto children = std::vector<std::shared_ptr<bound_node>>();
+			auto children{ std::vector<std::shared_ptr<bound_node>>() };
 			children.insert(children.begin(), statements.begin(), statements.end());
 			return children;
 		}

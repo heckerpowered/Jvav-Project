@@ -9,10 +9,10 @@ namespace compiler
 	export class symbol
 	{
 	public:
-		const std::string name;
+		const std::string logger_name;
 
 	protected:
-		[[nodiscard]] symbol(const std::string& name) noexcept : name(name)
+		[[nodiscard]] symbol(const std::string& logger_name) noexcept : logger_name(logger_name)
 		{
 		}
 

@@ -21,13 +21,12 @@ namespace compiler
 
 		bool try_declare(const variable_symbol& variable) noexcept
 		{
-			if (variables.contains(variable.name))
-			[[unlikely]]
+			if (variables.contains(variable.logger_name)) [[unlikely]]
 			{
 				return false;
 			}
 
-			variables.emplace(variable.name, std::ref(variable));
+			variables.emplace(variable.logger_name, std::ref(variable));
 			return true;
 		}
 
@@ -36,22 +35,22 @@ namespace compiler
 #else
 		std::optional<std::reference_wrapper<const variable_symbol>>
 #endif // __INTELLISENSE__
-		try_lookup(const std::string& name) noexcept
+		try_lookup(const std::string& logger_name) noexcept
 		{
-			const auto iterator = variables.find(name);
-			if (iterator != variables.end())
+			const auto iterator{ variables.find(logger_name) };
+			if (iterator != variables.end()) [[likely]]
 			{
 				return iterator->second;
 			}
 
-			if (!parent)
+			if (!parent) [[unlikely]]
 			{
 #ifndef __INTELLISENSE__
 				return std::nullopt;
 #endif // __INTELLISENSE__
 			}
 
-			return parent->try_lookup(name);
+			return parent->try_lookup(logger_name);
 		}
 
 		auto declared_variables() noexcept

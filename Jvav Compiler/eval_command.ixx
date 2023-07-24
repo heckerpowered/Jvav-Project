@@ -5,6 +5,7 @@ import std;
 import compiler.pretty_print;
 import compiler.syntax_tree;
 import compiler.zero_copy;
+import compiler.console_color;
 
 namespace compiler
 {
@@ -28,16 +29,18 @@ namespace compiler
 
 	void parse_and_print(const std::string& code) noexcept
 	{
-		const auto syntax_tree = syntax_tree::parse(code);
-		std::cout << compiler::to_string(syntax_tree.root) << std::endl;
+		const auto syntax_tree{ syntax_tree::parse(code) };
+#ifndef __INTELLISENSE__
+		std::println("{}", compiler::to_string(syntax_tree.root));
+#endif
 	}
 
 	void eval_input() noexcept
 	{
-		auto input_stream = std::stringstream();
+		auto input_stream{ std::stringstream{} };
 		while (true)
 		{
-			auto input = std::string();
+			auto input{ std::string{} };
 			std::getline(std::cin, input);
 			if (is_empty_or_whitespace(input))
 			{
@@ -51,40 +54,44 @@ namespace compiler
 
 	void eval_files(const std::vector<std::string_view>& files) noexcept
 	{
-		auto evaluated_files = std::vector<syntax_tree>();
-
-#ifndef __INTELLISENSE__
-		const auto start_time = std::chrono::high_resolution_clock::now();
-#endif
-		for (auto&& file : files)
+		auto evaluated_files{ std::vector<syntax_tree>{} };
+		for (auto&& user_file_path : files)
 		{
 			try
 			{
-				auto path = std::filesystem::path(file);
-				std::cout << "eval> " << path.filename().string() << std::endl;
-				auto file_stream = std::ifstream(path);
+				auto path = std::filesystem::path(user_file_path);
+				auto file_stream{ std::ifstream(path) };
 
 				file_stream.seekg(0, file_stream.end);
 				const auto file_size = file_stream.tellg();
 				file_stream.seekg(0, file_stream.beg);
 
-				auto file_content = std::string();
+				auto file_content{ std::string() };
 				file_content.reserve(file_size);
 				file_stream.read(file_content.data(), file_size);
+#ifndef __INTELLISENSE__
 
+#endif // !__INTELLISENSE__
 				evaluated_files.emplace_back(zero_copy{[&] { return syntax_tree::parse(file_content); }});
 			}
 			catch (const std::exception& exception)
 			{
-				std::cout << "eval> " << "Error while evaluate file: " << file << std::endl;
-				std::cout << "eval> " << exception.what() << std::endl;
-				break;
+				switch_color(console_color::dark_red, [&]
+				{
+#ifndef __INTELLISENSE__
+					std::println("Error while evaluating file: {}", user_file_path);
+					std::println("{}", exception.what());
+#endif // !__INTELLISENSE__
+
+				});
 			}
 		}
 
 		for (auto&& syntax_tree : evaluated_files)
 		{
-			std::cout << compiler::to_string(syntax_tree.root) << std::endl;
+#ifndef __INTELLISENSE__
+			compiler::to_string(syntax_tree.root);
+#endif // !__INTELLISENSE__
 		}
 	}
 
@@ -96,7 +103,7 @@ namespace compiler
 			return;
 		}
 
-		const auto& flag = arguments.front();
+		const auto& flag{ arguments.front() };
 		if (flag == "-f")
 		{
 			arguments.erase(arguments.begin());
