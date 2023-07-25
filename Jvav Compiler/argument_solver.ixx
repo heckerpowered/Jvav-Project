@@ -18,9 +18,9 @@ namespace compiler
 			}
 			else
 			{
-				auto logger_name = argument.substr(0, position);
+				auto name = argument.substr(0, position);
 				auto value = argument.substr(position + 1);
-				solved_arguments[logger_name].push_back(value);
+				solved_arguments[name].push_back(value);
 			}
 		}
 

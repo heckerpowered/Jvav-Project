@@ -16,20 +16,20 @@ namespace compiler
 	{
 	public:
 		const std::shared_ptr<source_text> text;
-		diagnostic_list diagnostics;
+		const std::shared_ptr<diagnostic_list> diagnostics;
 		const std::shared_ptr<compilation_unit_syntax> root;
 
 	private:
-		[[nodiscard]] syntax_tree(const std::shared_ptr<source_text>& text)
-			noexcept : text(text), root(compiler::parser(text, diagnostics).parse_compilation_unit())
+		[[nodiscard]] syntax_tree(const std::shared_ptr<source_text>& text) 
+			noexcept : text{ text }, diagnostics{ std::make_shared<diagnostic_list>() }, 
+			root{ compiler::parser(text, diagnostics).parse_compilation_unit() }
 		{
 		}
 
 	public:
 		[[nodiscard]] static syntax_tree parse(const std::string_view& text) noexcept
 		{
-			const auto source_text = std::make_shared<compiler::source_text>(text);
-			return parse(source_text);
+			return parse(std::make_shared<compiler::source_text>(text));
 		}
 
 		[[nodiscard]] static syntax_tree parse(const std::shared_ptr<source_text>& source_text) noexcept

@@ -289,5 +289,11 @@
     <ClCompile Include="warn_logger_level.ixx">
       <Filter>utility\logger\level</Filter>
     </ClCompile>
+    <ClCompile Include="bound_for_statement.ixx">
+      <Filter>code analysis\binding\statement</Filter>
+    </ClCompile>
+    <ClCompile Include="bound_global_scope.ixx">
+      <Filter>code analysis\binding</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

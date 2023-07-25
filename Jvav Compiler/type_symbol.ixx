@@ -11,9 +11,11 @@ namespace compiler
 	public:
 		using super = symbol;
 
-		[[nodiscard]] type_symbol(const std::string& logger_name) noexcept : super(logger_name)
+		[[nodiscard]] type_symbol(const std::string& name) noexcept : super(name)
 		{
 		}
+
+		type_symbol(const type_symbol&) = delete;
 
 		symbol_kind kind() const noexcept override
 		{

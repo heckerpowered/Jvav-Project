@@ -9,41 +9,18 @@ import compiler.zero_copy;
 
 namespace compiler
 {
-	export class diagnostic_list final
+	export class diagnostic_list final : public std::vector<diagnostic>
 	{
-		std::vector<diagnostic> diagnostic;
+	public:
+		using super = std::vector<diagnostic>;
 
-		void add_range(const std::vector<compiler::diagnostic>& range) noexcept
-		{
-			// cannot use insert, diagnostic& operator=(diagnostic const&) is implicitly removed by the compiler.
-			for (auto&& value : range)
-			{
-				diagnostic.emplace_back(value);
-			}
-		}
-
+	private:
 		void report(const text_span& span, const std::string& message) noexcept
 		{
-			diagnostic.emplace_back(span, message);
-			std::cout << message << std::endl;
+			emplace_back(span, message);
 		}
 
 	public:
-		[[nodiscard]] constexpr auto begin() noexcept
-		{
-			return diagnostic.begin();
-		}
-
-		[[nodiscard]] constexpr auto end() noexcept
-		{
-			return diagnostic.end();
-		}
-
-		[[nodiscard]] constexpr auto empty() const noexcept
-		{
-			return diagnostic.empty();
-		}
-
 		void report_unexpected_token(const text_span& span, const syntax_kind actual_kind,
 		                             const syntax_kind expected_kind) noexcept
 		{

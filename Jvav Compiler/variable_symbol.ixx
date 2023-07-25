@@ -13,10 +13,10 @@ namespace compiler
 		using super = symbol;
 
 		const bool is_read_only;
-		const type_symbol type;
+		const type_symbol& type;
 
-		[[nodiscard]] variable_symbol(const std::string& logger_name, const bool is_read_only, const type_symbol& type)
-			noexcept : super(logger_name), is_read_only(is_read_only), type(type)
+		[[nodiscard]] variable_symbol(const std::string& name, const bool is_read_only, const type_symbol& type)
+			noexcept : super(name), is_read_only(is_read_only), type(type)
 		{
 		}
 

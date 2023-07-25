@@ -8,11 +8,16 @@ namespace compiler
 	export class diagnostic final
 	{
 	public:
-		const text_span span;
-		const std::string message;
+		text_span span;
+		std::string message;
 
 		[[nodiscard]] diagnostic(const text_span& span, const std::string& message)
-			noexcept : span(span), message(message)
+			noexcept : span{ span }, message{ message }
+		{
+		}
+
+		[[nodiscard]] diagnostic(const text_span& span, std::string&& message)
+			noexcept : span{ span }, message{ message }
 		{
 		}
 	};

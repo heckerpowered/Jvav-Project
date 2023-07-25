@@ -14,10 +14,10 @@ namespace compiler
 	private:
 		const std::string_view text;
 		std::size_t position;
-		diagnostic_list& diagnostic_list;
+		const std::shared_ptr<diagnostic_list> diagnostic_list;
 
 	public:
-		[[nodiscard]] lexical_analyzer(const std::string_view& text, compiler::diagnostic_list& diagnostic_list)
+		[[nodiscard]] lexical_analyzer(const std::string_view& text, const std::shared_ptr<compiler::diagnostic_list>& diagnostic_list)
 			noexcept : text(text), position(), diagnostic_list(diagnostic_list)
 		{
 		}
@@ -210,7 +210,7 @@ namespace compiler
 			const auto text{ this->text.substr(start, length) };
 			if (kind == syntax_kind::bad_token) [[unlikely]]
 			{
-				diagnostic_list.report_bad_character(text_span(start, length), current());
+				diagnostic_list->report_bad_character(text_span(start, length), current());
 				next();
 			}
 			return std::make_shared<syntax_token>(kind, start, text);

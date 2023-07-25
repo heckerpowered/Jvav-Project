@@ -34,10 +34,11 @@ namespace compiler
 	private:
 		std::vector<std::shared_ptr<syntax_token>> tokens;
 		std::size_t position;
-		diagnostic_list& diagnostic_list;
+		const std::shared_ptr<diagnostic_list> diagnostic_list;
 
 	public:
-		[[nodiscard]] parser(const std::shared_ptr<source_text>& text, compiler::diagnostic_list& diagnostic_list)
+		[[nodiscard]] parser(const std::shared_ptr<source_text>& text, 
+							 const std::shared_ptr<compiler::diagnostic_list>& diagnostic_list)
 			noexcept : position(), diagnostic_list(diagnostic_list)
 		{
 			auto tokens{ std::vector<std::shared_ptr<syntax_token>>() };
@@ -91,7 +92,7 @@ namespace compiler
 				return next_token();
 			}
 
-			diagnostic_list.report_unexpected_token(current()->span(), current()->kind(), kind);
+			diagnostic_list->report_unexpected_token(current()->span(), current()->kind(), kind);
 			return std::make_shared<syntax_token>(kind, current()->position, "");
 		}
 

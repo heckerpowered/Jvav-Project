@@ -17,7 +17,7 @@ namespace compiler
 
 		[[nodiscard]] bound_assignment_expression(const std::shared_ptr<variable_symbol>& variable,
 		                                          const std::shared_ptr<bound_expression>& expression) noexcept :
-			variable(variable), expression(expression)
+			variable{ variable }, expression{ expression }
 		{
 		}
 
@@ -28,7 +28,7 @@ namespace compiler
 
 		std::vector<std::shared_ptr<bound_node>> children() const noexcept override
 		{
-			return {expression};
+			return { expression };
 		}
 
 		type_symbol type() const noexcept override

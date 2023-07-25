@@ -76,7 +76,7 @@ namespace compiler
 			}
 			catch (const std::exception& exception)
 			{
-				switch_color(console_color::dark_red, [&]
+				switch_foreground_color(console_color::dark_red, [&]
 				{
 #ifndef __INTELLISENSE__
 					std::println("Error while evaluating file: {}", user_file_path);

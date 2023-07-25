@@ -9,11 +9,11 @@ namespace compiler
 {
 	export class binder final
 	{
-		diagnostic_list& diagnostics;
+		const std::shared_ptr<diagnostic_list> diagnostics;
 		std::shared_ptr<bound_scope> scope;
 
 	public:
-		[[nodiscard]] binder(const std::shared_ptr<bound_scope>& parent, diagnostic_list& diagnostics)
+		[[nodiscard]] binder(const std::shared_ptr<bound_scope>& parent, const std::shared_ptr<diagnostic_list>& diagnostics)
 			noexcept : diagnostics(diagnostics), scope(scope)
 		{
 		}

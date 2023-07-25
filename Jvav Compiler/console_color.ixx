@@ -10,7 +10,7 @@ export import :implement;
 
 namespace compiler
 {
-	export void switch_color(const console_color color, std::invocable auto invocable) noexcept
+	export void switch_foreground_color(const console_color color, std::invocable auto invocable) noexcept
 	{
 		set_console_foreground_color(color);
 		invocable();

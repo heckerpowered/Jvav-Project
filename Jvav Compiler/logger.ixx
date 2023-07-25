@@ -31,8 +31,8 @@ namespace compiler {
 	public:
 		using super = std::unordered_set<std::shared_ptr<target>>;
 
-		[[nodiscard]] logger(std::string_view const& logger_name)
-			noexcept : logger_name(logger_name)
+		[[nodiscard]] logger(std::string_view const& name)
+			noexcept : logger_name(name)
 		{
 		}
 
