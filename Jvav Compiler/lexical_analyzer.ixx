@@ -2,10 +2,12 @@ export module compiler.lexical_analyzer;
 
 import std;
 
+import compiler.diagnostic_list;
+import compiler.integer_type;
 import compiler.syntax_facts;
 import compiler.syntax_token;
 import compiler.syntax_kind;
-import compiler.diagnostic_list;
+
 
 namespace compiler
 {
@@ -190,6 +192,17 @@ namespace compiler
 					next();
 				}
 				break;
+			case '.':
+				if (std::isdigit(lookahead()))
+				{
+					return analyze_number_token();
+				}
+				else
+				{
+					kind = syntax_kind::dot_token;
+					next();
+				}
+				break;
 
 			default:
 				if (std::isdigit(current()))
@@ -210,7 +223,7 @@ namespace compiler
 			const auto text{ this->text.substr(start, length) };
 			if (kind == syntax_kind::bad_token) [[unlikely]]
 			{
-				diagnostic_list->report_bad_character(text_span(start, length), current());
+				diagnostic_list->report_bad_character(text_span{ start, length }, current());
 				next();
 			}
 			return std::make_shared<syntax_token>(kind, start, text);
@@ -223,7 +236,10 @@ namespace compiler
 
 			// Digits can be part of an identifier, but not at the beginning
 			// of an identifier
-			while (std::isalpha(current()) || std::isdigit(current()) || current() == '_')
+			while (std::isalpha(current()) || 
+				   std::isdigit(current()) || 
+				   current() == '_' ||
+				   current() == '-')
 			{
 				next();
 			}
@@ -247,14 +263,208 @@ namespace compiler
 
 		[[nodiscard]] std::shared_ptr<syntax_token> analyze_number_token() noexcept
 		{
+			if (current() == '0')
+			{
+				if (lookahead() == 'x' || lookahead() == 'X')
+				{
+					return analyze_hexadecimal();
+				}
+				else if (lookahead() == 'b' || lookahead() == 'B')
+				{
+					return analyze_binary();
+				}
+				else
+				{
+					return analyze_octal();
+				}
+			}
+			else if (std::isdigit(current()))
+			{
+				return analyze_decimal();
+			}
+			else if (current() == '.')
+			{
+				return analyze_floating_point();
+			}
+
+			std::unreachable();
+		}
+
+		[[nodiscard]] std::shared_ptr<syntax_token> analyze_binary() noexcept
+		{
+			// Skip 0b prefix
+			position += 2;
+
 			const auto start{ position };
-			while (std::isdigit(current()))
+			while (current() == '0' ||
+				   current() == '1')
 			{
 				next();
 			}
 
 			const auto length{ position - start };
-			return std::make_shared<syntax_token>(syntax_kind::literal_token, start, text.substr(start, length));
+			const auto integer_string{ text.substr(start, length) };
+			auto integer{ std::uintmax_t{} };
+
+			const auto begin{ integer_string.data() };
+			const auto end{ integer_string.data() + integer_string.size() };
+			if (auto [ptr, ec]
+			{
+				std::from_chars(begin, end, integer, 8)
+			}; ec == std::errc())
+			{
+				return std::make_shared<syntax_token>(get_minimum_syntax_kind(integer), start, integer_string,
+													  integer);
+			}
+			diagnostic_list->report_invalid_number({ start, length }, integer_string);
+			return std::make_shared<syntax_token>(syntax_kind::bad_token, start, integer_string);
+		}
+
+		[[nodiscard]] std::shared_ptr<syntax_token> analyze_octal() noexcept
+		{
+			// Skip 0 prefix
+			next();
+
+			const auto start{ position };
+			while (current() >= '0' &&
+				   current() < '8')
+			{
+				next();
+			}
+
+			const auto length{ position - start };
+			const auto integer_string{ text.substr(start, length) };
+			auto integer{ std::uintmax_t{} };
+
+			const auto begin{ integer_string.data() };
+			const auto end{ integer_string.data() + integer_string.size() };
+			if (auto [ptr, ec]
+			{
+				std::from_chars(begin, end, integer, 8)
+			}; ec == std::errc())
+			{
+				return std::make_shared<syntax_token>(get_minimum_syntax_kind(integer), start, integer_string,
+													  integer);
+			}
+			diagnostic_list->report_invalid_number({ start, length }, integer_string);
+			return std::make_shared<syntax_token>(syntax_kind::bad_token, start, integer_string);
+		}
+
+		[[nodiscard]] std::shared_ptr<syntax_token> analyze_hexadecimal() noexcept
+		{
+			// Skip 0x prefix
+			position += 2;
+
+			const auto start{ position };
+			while (std::isdigit(current()) ||
+				   (current() >= 'a' && current() <= 'f') ||
+				   (current() >= 'A' && current() <= 'F'))
+			{
+				next();
+			}
+
+			const auto length{ position - start };
+			const auto integer_string{ text.substr(start, length) };
+			auto integer{ std::uintmax_t{} };
+
+			const auto begin{ integer_string.data() };
+			const auto end{ integer_string.data() + integer_string.size() };
+			if (auto [ptr, ec]
+			{
+				std::from_chars(begin, end, integer, 16)
+			}; ec == std::errc())
+			{
+				return std::make_shared<syntax_token>(get_minimum_syntax_kind(integer), start, integer_string,
+													  integer);
+			}
+			diagnostic_list->report_invalid_number({ start, length }, integer_string);
+			return std::make_shared<syntax_token>(syntax_kind::bad_token, start, integer_string);
+		}
+
+		[[nodiscard]] std::shared_ptr<syntax_token> analyze_decimal() noexcept
+		{
+			const auto start{ position };
+			while (std::isdigit(current()))
+			{
+				if (current() == 'E' ||
+					current() == 'e')
+				{
+					position = start;
+					return analyze_floating_point();
+				}
+				next();
+			}
+
+			const auto length{ position - start };
+			const auto integer_string{ text.substr(start, length) };
+			auto integer{ std::uintmax_t{} };
+
+			const auto begin{ integer_string.data() };
+			const auto end{ integer_string.data() + integer_string.size() };
+			if (auto [ptr, ec]
+			{
+				std::from_chars(begin, end, integer, 10)
+			}; ec == std::errc())
+			{
+				return std::make_shared<syntax_token>(get_minimum_syntax_kind(integer), start, integer_string, 
+													  integer);
+			}
+			diagnostic_list->report_invalid_number({ start, length }, integer_string);
+			return std::make_shared<syntax_token>(syntax_kind::bad_token, start, integer_string);
+		}
+
+		[[nodiscard]] std::shared_ptr<syntax_token> analyze_floating_point() noexcept
+		{
+			const auto starts_with_dot{ current() == '.' };
+			const auto start{ position };
+			while (std::isdigit(current()) ||
+				   current() == 'e' ||
+				   current() == 'E' ||
+				   current() == '+' ||
+				   current() == '-' ||
+				   current() == '.' ||
+				   current() == 'F' ||
+				   current() == 'f')
+			{
+				if (current() == 'f' ||
+					current() == 'F')
+				{
+					const auto length{ position - start };
+					const auto floating_point_string{ text.substr(start, length) };
+					auto floating_point{ float{} };
+
+					const auto begin{ floating_point_string.data() };
+					const auto end{ floating_point_string.data() + floating_point_string.size() };
+					if (auto [ptr, ec]
+					{
+						std::from_chars(begin, end, floating_point, std::chars_format::general)
+					}; ec == std::errc())
+					{
+						return std::make_shared<syntax_token>(syntax_kind::floating_point_token, start, floating_point_string,
+															  floating_point);
+					}
+					diagnostic_list->report_invalid_number({ start, length }, floating_point_string);
+					return std::make_shared<syntax_token>(syntax_kind::bad_token, start, floating_point_string);
+				}
+				next();
+			}
+
+			const auto length{ position - start };
+			const auto floating_point_string{ text.substr(start, length) };
+			auto floating_point{ double{} };
+
+			const auto begin{ floating_point_string.data() };
+			const auto end{ floating_point_string.data() + floating_point_string.size() };
+			if (auto [ptr, ec]
+			{
+				std::from_chars(begin, end, floating_point, std::chars_format::general)
+			}; ec == std::errc())
+			{
+				return std::make_shared<syntax_token>(syntax_kind::double_precision_floating_point_token, start, floating_point_string,
+													  floating_point);
+			}
+			diagnostic_list->report_invalid_number({ start, length }, floating_point_string);
+			return std::make_shared<syntax_token>(syntax_kind::bad_token, start, floating_point_string);
 		}
 	};
 

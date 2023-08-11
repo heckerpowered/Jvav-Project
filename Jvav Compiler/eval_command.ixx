@@ -30,9 +30,7 @@ namespace compiler
 	void parse_and_print(const std::string& code) noexcept
 	{
 		const auto syntax_tree{ syntax_tree::parse(code) };
-#ifndef __INTELLISENSE__
-		std::println("{}", compiler::to_string(syntax_tree.root));
-#endif
+		compiler::pretty_print(syntax_tree.root);
 	}
 
 	void eval_input() noexcept

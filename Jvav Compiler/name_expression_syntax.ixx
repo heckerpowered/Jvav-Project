@@ -26,7 +26,7 @@ namespace compiler
 
 		std::vector<std::shared_ptr<syntax_node>> children() const noexcept override
 		{
-			return {identifier_token};
+			return { identifier_token };
 		}
 	};
 }

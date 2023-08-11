@@ -8,7 +8,7 @@ export module runtime.main;
 
 import std;
 
-extern "C" NTSTATUS DriverEntry(DRIVER_OBJECT * driver_object, PUNICODE_STRING [[maybe_unused]] ) noexcept {
-	driver_object->DriverUnload = [](DRIVER_OBJECT*) {};
+extern "C" NTSTATUS DriverEntry(DRIVER_OBJECT * DriverObject, PUNICODE_STRING [[maybe_unused]] ) noexcept {
+	DriverObject->DriverUnload = [](DRIVER_OBJECT*) {};
 	return STATUS_SUCCESS;
 }

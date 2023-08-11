@@ -7,6 +7,9 @@ import compiler.console_error;
 namespace compiler {
 	export class console_category final : public std::error_category
 	{
+	public:
+		using super = std::error_category;
+
 		const char* name() const noexcept override
 		{
 			return "console";

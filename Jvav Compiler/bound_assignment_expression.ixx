@@ -31,7 +31,7 @@ namespace compiler
 			return { expression };
 		}
 
-		type_symbol type() const noexcept override
+		const type_symbol& type() const noexcept override
 		{
 			return expression->type();
 		}

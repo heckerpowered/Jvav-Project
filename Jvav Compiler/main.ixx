@@ -12,7 +12,7 @@ import compiler.argument_solver;
 import compiler.command_user_interface;
 
 /**
- * @brief Allocate an console, on windows, it enables virtual terminal.
+ * @brief The behavior of the method is depends on the platform. On windows
 */
 void initialize_console() noexcept
 {
@@ -34,8 +34,8 @@ export int main(int argument_count, char* arguments[]) noexcept
 
 	if (argument_count == 1) [[unlikely]]
 	{
-		std::println("Usage: source_files=path");
-		std::println("-h [Human]");
+		std::println(std::cout, "Usage: source_files=path");
+		std::println(std::cout, "-h [Human]");
 		return 0;
 	}
 
@@ -43,8 +43,8 @@ export int main(int argument_count, char* arguments[]) noexcept
 	if (solved_arguments.contains("h")) [[unlikely]]
 	{
 		initialize_console();
-		std::println("Welcome to Jvav!");
-		std::println("Jvav is a programming language first proposed by Dr. Haoyang Zhang and implemented by Mr. Rick Astley.");
+		std::println(std::cout, "Welcome to Jvav!");
+		std::println(std::cout, "Jvav is a programming language first proposed by Dr. Haoyang Zhang and implemented by Mr. Rick Astley.");
 		compiler::command_user_interface::launch();
 #ifdef DEBUG
 		_CrtDumpMemoryLeaks();

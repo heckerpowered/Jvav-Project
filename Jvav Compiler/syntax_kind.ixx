@@ -6,8 +6,13 @@ namespace compiler
 {
 	export enum class syntax_kind
 	{
-		//Tokens
-		literal_token,
+		// Tokens
+		floating_point_token,
+		double_precision_floating_point_token,
+		int8_token,
+		int16_token,
+		int32_token,
+		int64_token,
 		whitespace_token,
 		slash_token,
 		minus_token,
@@ -34,12 +39,13 @@ namespace compiler
 		pipe_token,
 		tilde_token,
 		hat_token,
+		dot_token,
 
-		//Nodes
+		// Nodes
 		compilation_unit,
 		else_clause,
 
-		//Statements
+		// Statements
 		block_statement,
 		expression_statement,
 		variable_declaration,
@@ -47,7 +53,7 @@ namespace compiler
 		while_statement,
 		for_statement,
 
-		//Expressions
+		// Expressions
 		binary_expression,
 		parenthesized_expression,
 		unary_expression,
@@ -56,7 +62,7 @@ namespace compiler
 		name_expression,
 		assignment_expression,
 
-		//Keywords
+		// Keywords
 		true_keyword,
 		false_keyword,
 		auto_keyword,
@@ -70,8 +76,18 @@ namespace compiler
 	{
 		switch (kind)
 		{
-		case syntax_kind::literal_token:
-			return "LiteralToken";
+		case syntax_kind::int8_token:
+			return "Int8Token";
+		case syntax_kind::int16_token:
+			return "Int16Token";
+		case syntax_kind::int32_token:
+			return "Int32Token";
+		case syntax_kind::int64_token:
+			return "Int64Token";
+		case syntax_kind::floating_point_token:
+			return "FloatingPointToken";
+		case syntax_kind::double_precision_floating_point_token:
+			return "DoublePrecisionFloatingPointToken";
 		case syntax_kind::whitespace_token:
 			return "WhitespaceToken";
 		case syntax_kind::slash_token:

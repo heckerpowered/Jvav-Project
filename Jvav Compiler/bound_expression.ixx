@@ -10,6 +10,6 @@ namespace compiler
 	public:
 		using super = bound_node;
 
-		virtual type_symbol type() const noexcept = 0;
+		virtual const type_symbol& type() const noexcept = 0;
 	};
 }

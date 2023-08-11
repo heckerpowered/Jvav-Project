@@ -22,7 +22,10 @@ namespace compiler
 		auto split_input = std::vector<std::string_view>();
 		for (const auto& value : input | std::views::split(' '))
 		{
-			split_input.emplace_back(zero_copy{[&]() { return std::string_view(value.begin(), value.end()); }});
+			split_input.emplace_back(zero_copy{ [&]
+			{
+				return std::string_view{ value.begin(), value.end() };
+			} });
 		}
 		return split_input;
 	}
@@ -37,11 +40,11 @@ namespace compiler
 		{
 			std::cin.sync_with_stdio(false);
 			std::cout.sync_with_stdio(false);
-			// println("");
-
+			std::println("");
+			
 			while (true)
 			{
-				// print("> ");
+				std::print("> ");
 				auto input = std::string();
 				std::getline(std::cin, input);
 
@@ -55,8 +58,7 @@ namespace compiler
 				const auto iterator = commands.find(command_name);
 				if (iterator == commands.end())
 				{
-					// perrln("Command not found");
-					// perrln("");
+					std::println(std::cerr, "Command not found");
 					continue;
 				}
 

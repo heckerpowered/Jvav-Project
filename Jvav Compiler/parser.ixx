@@ -2,12 +2,11 @@ export module compiler.parser;
 
 import std;
 
-import compiler.boolean_literal_expression_syntax;
-import compiler.number_literal_expression_syntax;
 import compiler.parenthesized_expression_syntax;
 import compiler.assignment_expression_syntax;
 import compiler.expression_statement_syntax;
 import compiler.variable_declaration_syntax;
+import compiler.literal_expression_syntax;
 import compiler.binary_expression_syntax;
 import compiler.unary_expression_syntax;
 import compiler.compilation_unit_syntax;
@@ -19,10 +18,10 @@ import compiler.else_clause_syntax;
 import compiler.expression_syntax;
 import compiler.statement_syntax;
 import compiler.lexical_analyzer;
+import compiler.diagnostic_list;
 import compiler.syntax_token;
 import compiler.syntax_facts;
 import compiler.source_text;
-import compiler.diagnostic_list;
 import compiler.syntax_kind;
 import compiler.diagnostic;
 import compiler.zero_copy;
@@ -100,7 +99,7 @@ namespace compiler
 		{
 			return parse_assignment_expression();
 		}
-
+	
 		[[nodiscard]] std::shared_ptr<variable_declaration_syntax> parse_variable_declaration() noexcept
 		{
 			const auto type_identifier_token{ match_token(syntax_kind::identifier_token) };
@@ -118,17 +117,17 @@ namespace compiler
 			return std::make_shared<name_expression_syntax>(identifier_token);
 		}
 
-		[[nodiscard]] std::shared_ptr<number_literal_expression_syntax> parse_number_literal() noexcept
+		[[nodiscard]] std::shared_ptr<literal_expression_syntax> parse_number_literal() noexcept
 		{
-			const auto number_token{ match_token(syntax_kind::literal_token) };
-			return std::make_shared<number_literal_expression_syntax>(number_token);
+			const auto number_token{ next_token() };
+			return std::make_shared<literal_expression_syntax>(number_token);
 		}
 
-		[[nodiscard]] std::shared_ptr<boolean_literal_expression_syntax> parse_boolean_literal() noexcept
+		[[nodiscard]] std::shared_ptr<literal_expression_syntax> parse_boolean_literal() noexcept
 		{
 			const auto is_true{ current()->kind() == syntax_kind::true_keyword };
 			const auto keyword_token{ match_token(is_true ? syntax_kind::true_keyword : syntax_kind::false_keyword) };
-			return std::make_shared<boolean_literal_expression_syntax>(keyword_token);
+			return std::make_shared<literal_expression_syntax>(keyword_token, is_true);
 		}
 
 		[[nodiscard]] std::shared_ptr<parenthesized_expression_syntax> parse_parenthesized_expression() noexcept
@@ -148,16 +147,19 @@ namespace compiler
 			case syntax_kind::false_keyword:
 			case syntax_kind::true_keyword:
 				return parse_boolean_literal();
-			case syntax_kind::literal_token:
+			case syntax_kind::int8_token:
+			case syntax_kind::int16_token:
+			case syntax_kind::int32_token:
+			case syntax_kind::int64_token:
+			case syntax_kind::floating_point_token:
+			case syntax_kind::double_precision_floating_point_token:
 				return parse_number_literal();
 			default:
 				return parse_name_expression();
 			}
 		}
 
-		[[nodiscard]]
-		std::shared_ptr<expression_syntax> parse_binary_expression(
-			const std::uint_fast8_t parent_precedence = 0) noexcept
+		[[nodiscard]] std::shared_ptr<expression_syntax> parse_binary_expression(const std::uint_fast8_t parent_precedence = 0) noexcept
 		{
 			auto left{ std::shared_ptr<expression_syntax>() };
 

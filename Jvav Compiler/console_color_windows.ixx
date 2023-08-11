@@ -93,7 +93,7 @@ namespace compiler
 			case console_color::yellow:
 				return FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN;
 			default:
-				return std::unexpected(std::make_error_code(console_error::invalid_console_color));
+				return std::unexpected(compiler::make_error_code(console_error::invalid_console_color));
 			}
 		}
 	}

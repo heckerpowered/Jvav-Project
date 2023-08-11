@@ -1,9 +1,11 @@
 export module compiler.syntax_token;
 
 import std;
+
+import compiler.literal_variant;
 import compiler.syntax_kind;
-import compiler.text_span;
 import compiler.syntax_node;
+import compiler.text_span;
 
 namespace compiler
 {
@@ -14,11 +16,19 @@ namespace compiler
 
 		const syntax_kind syntax_kind;
 		const std::size_t position;
-		const std::string text;
+		const std::string_view text;
+		builtin_literal_type value;
 
 		[[nodiscard]] syntax_token(const compiler::syntax_kind kind, const std::size_t position,
-						           const std::string_view& text)
-			noexcept : syntax_kind(kind), position(position), text(text)
+								   const std::string_view& text)
+			noexcept : syntax_kind{ kind }, position{ position }, text{ text }
+		{
+		}
+
+		[[nodiscard]] syntax_token(const compiler::syntax_kind kind, const std::size_t position,
+								   const std::string_view& text, const builtin_literal_type& value
+		)
+			noexcept : syntax_kind{ kind }, position{ position }, text{ text }, value{ value }
 		{
 		}
 

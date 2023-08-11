@@ -26,8 +26,6 @@ namespace compiler
 				std::println(std::cerr, "Cannot initialize console: {}",
 							 std::error_code(GetLastError(), std::system_category()).message());
 #endif // !__INTELLISNESE__
-
-
 			});
 			return;
 		}

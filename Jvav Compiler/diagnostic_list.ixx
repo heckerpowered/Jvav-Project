@@ -40,5 +40,14 @@ namespace compiler
 			report(span, message);
 #endif // __INTELLISENSE__
 		}
+
+		void report_invalid_number(const text_span& span, const std::string_view& number) noexcept
+		{
+			// Formatting makes IntelliSense crash, Visual Studio 2022 17.7.0 Preview 2
+#ifndef __INTELLISENSE__
+			const auto message{ std::format("Invalid number {}", number) };
+			report(span, message);
+#endif
+		}
 	};
 }

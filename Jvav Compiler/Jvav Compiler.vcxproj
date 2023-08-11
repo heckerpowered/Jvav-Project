@@ -144,12 +144,16 @@
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <BuildStlModules>true</BuildStlModules>
+      <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -191,11 +195,13 @@
     <ClCompile Include="benchmark_command.ixx" />
     <ClCompile Include="bound_for_statement.ixx" />
     <ClCompile Include="bound_global_scope.ixx" />
+    <ClCompile Include="bound_if_statement.ixx" />
+    <ClCompile Include="bound_boolean_literal_expression.ixx" />
+    <ClCompile Include="bound_number_literal_expression.ixx" />
     <ClCompile Include="command.ixx" />
     <ClCompile Include="binary_expression_syntax.ixx" />
     <ClCompile Include="binder.ixx" />
     <ClCompile Include="block_statement_syntax.ixx" />
-    <ClCompile Include="boolean_literal_expression_syntax.ixx" />
     <ClCompile Include="bound_assignment_expression.ixx" />
     <ClCompile Include="bound_binary_operator.ixx" />
     <ClCompile Include="bound_binary_operator_kind.ixx" />
@@ -216,7 +222,10 @@
     <ClCompile Include="else_clause_syntax.ixx" />
     <ClCompile Include="eval_command.ixx" />
     <ClCompile Include="expression_statement_syntax.ixx" />
+    <ClCompile Include="integral_optimization.ixx" />
+    <ClCompile Include="literal_variant.ixx" />
     <ClCompile Include="logger_level.ixx" />
+    <ClCompile Include="noexception.ixx" />
     <ClCompile Include="stream_target.ixx" />
     <ClCompile Include="for_statement_syntax.ixx" />
     <ClCompile Include="if_statement_syntax.ixx" />
@@ -242,7 +251,7 @@
     <ClCompile Include="command_user_interface.ixx" />
     <ClCompile Include="expression_syntax.ixx" />
     <ClCompile Include="lexical_analyzer.ixx" />
-    <ClCompile Include="number_literal_expression_syntax.ixx" />
+    <ClCompile Include="literal_expression_syntax.ixx" />
     <ClCompile Include="main.ixx" />
     <ClCompile Include="name_expression_syntax.ixx" />
     <ClCompile Include="parser.ixx" />

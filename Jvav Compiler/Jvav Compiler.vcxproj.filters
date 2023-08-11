@@ -16,9 +16,6 @@
     <Filter Include="code analysis\syntax\expression">
       <UniqueIdentifier>{01ec989b-62ec-4863-a928-4e62b240aa25}</UniqueIdentifier>
     </Filter>
-    <Filter Include="code analysis\syntax\experimental">
-      <UniqueIdentifier>{79691737-8882-4a5a-86c5-e30d007c8af8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="code analysis\syntax\statement">
       <UniqueIdentifier>{14543348-a4b1-46f4-ab52-f3a524e12a0a}</UniqueIdentifier>
     </Filter>
@@ -70,6 +67,9 @@
     <Filter Include="utility\logger\level">
       <UniqueIdentifier>{7c19997d-e5c9-42de-802a-d2d8bc01edd2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="code analysis\syntax\builtin">
+      <UniqueIdentifier>{3a137db6-f95f-4531-a2e9-36a0a280295b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.ixx" />
@@ -118,16 +118,13 @@
     <ClCompile Include="unary_expression_syntax.ixx">
       <Filter>code analysis\syntax\expression</Filter>
     </ClCompile>
-    <ClCompile Include="number_literal_expression_syntax.ixx">
+    <ClCompile Include="literal_expression_syntax.ixx">
       <Filter>code analysis\syntax\expression</Filter>
     </ClCompile>
     <ClCompile Include="assignment_expression_syntax.ixx">
       <Filter>code analysis\syntax\expression</Filter>
     </ClCompile>
     <ClCompile Include="binary_expression_syntax.ixx">
-      <Filter>code analysis\syntax\expression</Filter>
-    </ClCompile>
-    <ClCompile Include="boolean_literal_expression_syntax.ixx">
       <Filter>code analysis\syntax\expression</Filter>
     </ClCompile>
     <ClCompile Include="parenthesized_expression_syntax.ixx">
@@ -294,6 +291,24 @@
     </ClCompile>
     <ClCompile Include="bound_global_scope.ixx">
       <Filter>code analysis\binding</Filter>
+    </ClCompile>
+    <ClCompile Include="bound_if_statement.ixx">
+      <Filter>code analysis\binding\statement</Filter>
+    </ClCompile>
+    <ClCompile Include="bound_boolean_literal_expression.ixx">
+      <Filter>code analysis\binding\expression</Filter>
+    </ClCompile>
+    <ClCompile Include="bound_number_literal_expression.ixx">
+      <Filter>code analysis\binding\expression</Filter>
+    </ClCompile>
+    <ClCompile Include="noexception.ixx">
+      <Filter>utility</Filter>
+    </ClCompile>
+    <ClCompile Include="literal_variant.ixx">
+      <Filter>code analysis\syntax\builtin</Filter>
+    </ClCompile>
+    <ClCompile Include="integral_optimization.ixx">
+      <Filter>code analysis\syntax\builtin</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
