@@ -1,2 +1,2 @@
 # What is Jvav
-Jvav is a programming language first proposed by Dr. Haoyang Zhang and implemented by Mr. Rick Astley.
+Jvav is a programming language first proposed by Dr. Haoyang Zhang and implemented by Mr. Rick Astley (aka. [Heckerpowered](https://github.com/heckerpowered)).
